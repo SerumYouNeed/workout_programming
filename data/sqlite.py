@@ -9,8 +9,10 @@ try:
 
     cursor.executescript(sql_script)
     cursor.close()
+
 except sqlite3.Error as error:
     print(f'Error while reading sql script', error)
+    
 finally:
     if connection:
         connection.close()

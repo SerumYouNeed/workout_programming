@@ -1,20 +1,28 @@
-from tkinter import Tk, BOTH, Canvas, Label, Spinbox
+from tkinter import Tk
+from tkinter.font import Font
+from tkinter import ttk
 
 class Window:
-    def __init__(self, geometry, title):
+    def __init__(self):
         self.__root = Tk()
-        # geometry in format: "widthxheight"
-        self.__root.geometry(geometry)
-        self.__root.title(title)
+        content = ttk.Frame(self.__root)
+        frame = ttk.Frame(content, width=700, height=700)
+        content.grid(column=1, row=1)
+        frame.grid(column=1, row=1, columnspan=2, rowspan=3)
 
-        # self.__canvas = Canvas(self.__root, bg="black")
-        # self.__canvas.pack(fill=BOTH, expand=1)
+        gritting_font = Font(family="Helvetica", size=32)
+        text_font = Font(family="Helvetica", size=22)
 
-        grittings = Label(self.__root, background="black", foreground="white", height=3, text="Welcome in workout creator!")
-        grittings.pack()
+        grittings = ttk.Label(content, text="Welcome in workout creator!")
+        grittings.grid(column=1, row=1, columnspan=2)
 
-        frecquency_selector = Spinbox(self.__root, from_=1, to=6)
-        frecquency_selector.pack()
+        frecquency_q = ttk.Label(content, text="Training days:")
+        frecquency_q.grid(column=1, row=2)
+        frecquency_selector = ttk.Spinbox(content, from_=1, to=6)
+        frecquency_selector.grid(column=2, row=2)
+
+        submit_btn = ttk.Button(content, text="Submit")
+        submit_btn.grid(column=1, row=3, columnspan=2)
 
         
    
