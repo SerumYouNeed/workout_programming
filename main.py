@@ -1,12 +1,11 @@
 from tkinter import *
-from window import Window
+from window import MainWindow
 
 
 def main():
 
-    win = Window()
+    win = MainWindow()
+    win.mainloop()
 
-
-    
-
-main()
+if __name__ == "__main__":
+    main()

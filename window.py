@@ -1,29 +1,42 @@
-from tkinter import Tk
-from tkinter.font import Font
+import tkinter as tk
 from tkinter import ttk
 
-class Window:
+class MainWindow(tk.Tk):
     def __init__(self):
-        self.__root = Tk()
-        content = ttk.Frame(self.__root)
-        frame = ttk.Frame(content, width=700, height=700)
-        content.grid(column=1, row=1)
-        frame.grid(column=1, row=1, columnspan=2, rowspan=3)
+        super().__init__()
+        self.title('Workout creator')
+        self.geometry('700x700')
+        # This tells to use as much space as possible
+        self.rowconfigure(0, weight=1)
+        self.columnconfigure(0, weight=1)
 
-        gritting_font = Font(family="Helvetica", size=32)
-        text_font = Font(family="Helvetica", size=22)
+        # Styles
+        style = ttk.Style()
+        style.configure("MainFrame.TFrame", background="black")
+                
+        # Create widgets        
+        frame_main = ttk.Frame(self, style="MainFrame.TFrame")
 
-        grittings = ttk.Label(content, text="Welcome in workout creator!")
-        grittings.grid(column=1, row=1, columnspan=2)
+        # Put widgets on the screen
+        # Sticky pin frame to east, west, north, south 
+        frame_main.grid(column=0, row=0, sticky="ewns")
+    
+        # grittings = ttk.Label(frame_main, text="Welcome in workout creator!")
+        # grittings.grid(column=1, row=1, columnspan=2)
 
-        frecquency_q = ttk.Label(content, text="Training days:")
-        frecquency_q.grid(column=1, row=2)
-        frecquency_selector = ttk.Spinbox(content, from_=1, to=6)
-        frecquency_selector.grid(column=2, row=2)
+        # def submit():
+        #     frecquency_a = frecquency_selector.get()
+        #     print(f'frequency: {frecquency_a}')
+        #     if self.grittings.winfo_viewable():
+        #         self.grittings.grid_forget()
 
-        submit_btn = ttk.Button(content, text="Submit")
-        submit_btn.grid(column=1, row=3, columnspan=2)
 
-        
-   
-        self.__root.mainloop()
+        # frecquency_q = ttk.Label(content, text="Training days:")
+        # frecquency_q.grid(column=1, row=2)
+        # frecquency_selector = ttk.Spinbox(from_=1, to=6)
+        # frecquency_selector.grid(column=2, row=2)
+
+        # submit_btn = ttk.Button(content, text="Submit", command=submit)
+        # submit_btn.grid(column=1, row=3, columnspan=2)
+
+    
