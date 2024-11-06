@@ -1,4 +1,5 @@
 import customtkinter as ctk
+from programming_frame import ProgrammingFrame
 
 class MainFrame(ctk.CTkFrame):
     def __init__(self, parent):
@@ -6,12 +7,13 @@ class MainFrame(ctk.CTkFrame):
         self.configure(fg_color="black")
         self.grid(row=0, column=0, sticky="ewns")
 
-    def create_widgets(self):
+    def create_widgets(self, parent):
         # create the grid
         self.rowconfigure((0,1,2), weight=1)
         self.columnconfigure((0,1), weight=1)
 
         # create widgets
+        self.next_frame = ProgrammingFrame(self)
         grittings = ctk.CTkLabel(self, 
                                  text="Welcome in workout creator!",
                                  fg_color="black",
@@ -25,15 +27,7 @@ class MainFrame(ctk.CTkFrame):
         
         def combobox_callback(choice):
             print("combobox dropdown clicked:", choice)
-            match choice:
-                case "1":
-                case "2":
-                case "3":
-                case "4":
-                case "5":
-                case "6":
-                case "7":
-                    pass
+            parent.switch_frame(ProgrammingFrame)
 
         frecquency_selector = ctk.CTkComboBox(self, 
                                               values=["1", "2", "3", "4", "5", "6" , "7"], 
@@ -44,6 +38,7 @@ class MainFrame(ctk.CTkFrame):
         grittings.grid(row=0, column=0, columnspan=2)
         frecquency_q.grid(row=1, column=0, sticky="e")
         frecquency_selector.grid(row=1, column=1, sticky="w")
+
 
 
 # combobox_var = ctk.StringVar(value="2")

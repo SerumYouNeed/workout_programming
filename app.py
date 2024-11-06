@@ -10,11 +10,22 @@ class App(ctk.CTk):
         # This tells to use as much space as possible
         self.rowconfigure(0, weight=1)
         self.columnconfigure(0, weight=1)
+        self._frame = None
 
-        self.main_frame = MainFrame(self)
-        self.main_frame.create_widgets()
+        # self.main_frame = MainFrame(self)
+
+        self.switch_frame(MainFrame)
 
         self.mainloop()
+
+    def switch_frame(self, frame_class):
+        """Destroys current frame and replaces it with a new one."""
+        new_frame = frame_class(self)
+        if self._frame is not None:
+            self._frame.destroy()
+        self._frame = new_frame
+        self._frame.pack(fill="both", expand=True)
+        self._frame.create_widgets(self)
         
         
         
