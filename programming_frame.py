@@ -13,10 +13,12 @@ class ProgrammingFrame(ctk.CTkFrame):
 
         # create widgets 
         # for 1 training day per week
-        advice_d1 = ctk.CTkLabel(self, text="Pick max 7 exercises from dropdown menu below. Number of exercises is not random. You can pick less - and adjust later - but more wont give you better gains. One thing for sure: you will spent more than two hours in the gym meanwhile much of your sets will be counterproductive.", 
-                                 fg_color="black", 
-                                 text_color="white", 
-                                 font=("Helvatica", 18))
+        advice_d1 = ctk.CTkTextbox(self, width=500)
+        advice_d1.insert("0.0", "Pick max 7 exercises from dropdown menu below. Number of exercises is not random. You can pick less - and adjust later - but more wont give you better gains. One thing for sure: you will spent more than two hours in the gym meanwhile much of your sets will be counterproductive.") 
+        advice_d1.configure(state="disabled",
+                            fg_color="black", 
+                            text_color="white", 
+                            font=("Helvatica", 18))
         d1_lbl = ctk.CTkLabel(self, text="Day 1",
                               fg_color="black",
                               text_color="white",
