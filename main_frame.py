@@ -28,13 +28,20 @@ class MainFrame(ctk.CTkFrame):
                                  fg_color="black",
                                  text_color="white",
                                  font=("Helvatica", 22))
+        def nextBtn_callback():
+            new_frame = frecquency_selector.get()
+            match new_frame:
+                case "1":
+                    parent.switch_frame(ProgrammingFrame1)
+
         next_btn = ctk.CTkButton(self,
                                  text="Next",
                                  font=("Helvatica", 15),
                                  text_color="white",
                                  fg_color="gray15",
                                  corner_radius=8,
-                                 hover_color="gray18") 
+                                 hover_color="gray18",
+                                 command=nextBtn_callback) 
                
         def combobox_callback(choice):
             # instructions.delete()
