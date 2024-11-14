@@ -7,36 +7,48 @@ class ProgrammingFrame1(ctk.CTkFrame):
 
     # create widgets
     def create_widgets(self, parent):
-        d1_lbl = ctk.CTkLabel(self, text="Day 1",
+        day_frame = ctk.CTkFrame(self, fg_color="yellow")
+        day_frame.pack(expand=True, fill="both")
+        label_frame = ctk.CTkFrame(day_frame, fg_color="pink")
+        label_frame.pack(expand=True, fill="x")
+        d1_lbl = ctk.CTkLabel(master=label_frame, text="Day 1",
                               fg_color="black",
                               text_color="white",
                               font=("Helvatica", 27))
-        ex_lbl = ctk.CTkLabel(self, text="Exercise",
+        etq_frame = ctk.CTkFrame(day_frame, fg_color="red")
+        etq_frame.pack(expand=True, fill="x")
+        ex_lbl = ctk.CTkLabel(master=etq_frame, text="Exercise",
                               fg_color="black",
                               text_color="white",
                               font=("Helvatica", 22))
-        st_lbl = ctk.CTkLabel(self, text="Sets",
+        st_lbl = ctk.CTkLabel(master=etq_frame, text="Sets",
                               fg_color="black",
                               text_color="white",
                               font=("Helvatica", 22))
+
         
+        choice_frame_ex = ctk.CTkFrame(day_frame)
+        choice_frame_ex.pack(side="left", fill="both")
+        choice_frame_set = ctk.CTkFrame(day_frame)
+        choice_frame_set.pack(side="left", fill="both")
         exercises = []
         sets = []
-        for i in range(7):
-            exercise = ctk.CTkComboBox(self, values=["press", "2", "3", "4", "5", "6" , "7"])
-            set = ctk.CTkComboBox(self, values=["1", "2", "3", "4", "5"])
+        for i in range(2):
+            exercise = ctk.CTkComboBox(master=choice_frame_ex, values=["press", "2", "3", "4", "5", "6"])
+            set = ctk.CTkComboBox(master=choice_frame_set, values=["1", "2", "3", "4", "5"])
             exercises.append(exercise)
             sets.append(set)
 
         # place widgets
         d1_lbl.pack()
-        ex_lbl.pack()
 
+        ex_lbl.pack(side="left", expand=True, fill="both")
         for i in range(len(exercises)):
-            exercises[i].pack(side="left")
-            sets[i].pack(side="left")
+            exercises[i].pack()
         
-        st_lbl.pack()
+        st_lbl.pack(side="left", expand=True, fill="both")
+        for i in range(len(exercises)):
+            sets[i].pack()
        
 
 class ProgrammingFrame2(ctk.CTkFrame):
