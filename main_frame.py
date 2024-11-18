@@ -1,5 +1,5 @@
 import customtkinter as ctk
-from programming_frame1 import ProgrammingFrame1, ProgrammingFrame2
+from programming_frame1 import ProgrammingFrame1
 
 class MainFrame(ctk.CTkFrame):
     def __init__(self, parent):
