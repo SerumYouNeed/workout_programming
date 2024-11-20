@@ -1,13 +1,13 @@
 import customtkinter as ctk
 
-class ProgrammingFrame1(ctk.CTkFrame):
+class ProgrammingFrame(ctk.CTkFrame):
     def __init__(self, parent):
         super().__init__(parent) 
         self.configure(fg_color="black")
 
     # create widgets
     def create_widgets(self, parent):
-        # packed frame with mini frames: exercises selector frames, set selector frames        
+        # main packed frame with mini frames        
         day_frame = ctk.CTkFrame(self, fg_color="black")
         day_frame.pack(expand=True, fill="both")
 
@@ -31,10 +31,21 @@ class ProgrammingFrame1(ctk.CTkFrame):
                               text_color="white",
                               font=("Helvatica", 22))
         
-        choice_frame_ex = ctk.CTkFrame(day_frame, fg_color="black")
+        # frame with choices
+        choice_frame = ctk.CTkFrame(day_frame, fg_color="black")
+        choice_frame.pack(expand=True, fill="both")
+        choice_frame_ex = ctk.CTkFrame(choice_frame, fg_color="black")
         choice_frame_ex.pack(side="left", expand=True, fill="both")
-        choice_frame_set = ctk.CTkFrame(day_frame, fg_color="black")
+        choice_frame_set = ctk.CTkFrame(choice_frame, fg_color="black")
         choice_frame_set.pack(side="right", expand=True, fill="both")
+
+        # frame with answears 
+        answear_frame = ctk.CTkFrame(day_frame, fg_color="black")
+        answear_frame.pack(expand=True, fill="both")
+        muscle_groups_frame = ctk.CTkFrame(answear_frame, fg_color="black")
+        muscle_groups_frame.pack(side="left", expand=True, fill="both")
+        sets_total_frame = ctk.CTkFrame(answear_frame, fg_color="black")
+        sets_total_frame.pack(side="right", expand=True, fill="both")
 
         # place widgets
         day_lbl.pack(expand=True, fill="both")

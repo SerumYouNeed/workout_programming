@@ -11,8 +11,7 @@ class App(ctk.CTk):
         self.rowconfigure(0, weight=1)
         self.columnconfigure(0, weight=1)
         self._frame = None
-
-        # self.main_frame = MainFrame(self)
+        self.number_of_days = 1
 
         self.switch_frame(MainFrame)
 

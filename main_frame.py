@@ -1,5 +1,5 @@
 import customtkinter as ctk
-from programming_frame1 import ProgrammingFrame1
+from programming_frame import ProgrammingFrame
 
 class MainFrame(ctk.CTkFrame):
     def __init__(self, parent):
@@ -9,7 +9,6 @@ class MainFrame(ctk.CTkFrame):
 
     def create_widgets(self, parent):
         # create widgets
-        self.next_frame = ProgrammingFrame1(self)
         grittings = ctk.CTkLabel(self, 
                                  text="Welcome in workout creator!",
                                  fg_color="black",
@@ -29,11 +28,9 @@ class MainFrame(ctk.CTkFrame):
                                  text_color="white",
                                  font=("Helvatica", 22))
         def nextBtn_callback():
-            new_frame = frecquency_selector.get()
-            match new_frame:
-                case "1":
-                    parent.switch_frame(ProgrammingFrame1)
-
+            parent.number_of_days = int(frecquency_selector.get())
+            parent.switch_frame(EmptyFrame)
+                    
         next_btn = ctk.CTkButton(self,
                                  text="Next",
                                  font=("Helvatica", 15),
@@ -50,7 +47,6 @@ class MainFrame(ctk.CTkFrame):
                     instructions.configure(text="One day a week is usually not enough - but hey, it is still better that none.\nPick max 7 exercises from dropdown menu below. Number of exercises is not random.\nYou can pick less and adjust later.")
                 case "2":
                     instructions.configure(text="For two training days it is highly recomended to perform two full body training.\nIn this case each muscle will be trained two times per week.\nYou can stimulate muscles from diffrent angles - say, perform flat bench press on day one and incline on day two.")
-                #     # parent.switch_frame(ProgrammingFrame2)
                 case "3":
                     instructions.configure(text="Three days split can be aranged as 3 x FBW, or you can create two routines A/B - like upper/lower, push/pull, torso/limbs, front/rear - and train A/B/A in first week, then B/A/B in second.\nTraing will be a tad longer then in four days per week but much more versatile then one and two days per week.")
                 case "4":
@@ -73,6 +69,31 @@ class MainFrame(ctk.CTkFrame):
         frecquency_selector.pack(pady=15)
         next_btn.pack()
 
+class EmptyFrame(ctk.CTkFrame):
+    def __init__(self, parent):
+        super().__init__(parent) 
+        self.configure(fg_color="black")
 
+    def create_widgets(self, parent):
+        for i in range(parent.number_of_days):
+            day_frame = ProgrammingFrame(self)
+            day_frame.pack(side="left", expand=True, fill="both")
+            day_frame.create_widgets(self)
 
+        muscles = MusclesFrame(self)
+        muscles.pack(side="left", expand=True, fill="both")
+        muscles.create_widgets(self)
+
+class MusclesFrame(ctk.CTkFrame):
+    def __init__(self, parent):
+        super().__init__(parent)
+        self.configure(fg_color="red")
+
+    def create_widgets(self, parent):
+        muscles = ["Biceps", "Calves", "Chest", "Glutes", "Hamstrings", "Lats", "Lower back", "Upper back", "Quads", "Delts", "Traps", "Triceps"]
+
+        for i in range(len(muscles)):
+            muscle = ctk.CTkLabel(master=self, text_color="white")
+            muscle.pack()
+            muscle.configure(text=muscles[i])
         
