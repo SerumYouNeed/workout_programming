@@ -1,5 +1,5 @@
 import customtkinter as ctk
-from programming_frame import ProgrammingFrame
+from programming_frame import EmptyFrame
 
 class MainFrame(ctk.CTkFrame):
     def __init__(self, parent):
@@ -28,7 +28,6 @@ class MainFrame(ctk.CTkFrame):
                                  text_color="white",
                                  font=("Helvatica", 22))
         def nextBtn_callback():
-            parent.number_of_days = int(frecquency_selector.get())
             parent.switch_frame(EmptyFrame)
                     
         next_btn = ctk.CTkButton(self,
@@ -69,31 +68,3 @@ class MainFrame(ctk.CTkFrame):
         frecquency_selector.pack(pady=15)
         next_btn.pack()
 
-class EmptyFrame(ctk.CTkFrame):
-    def __init__(self, parent):
-        super().__init__(parent) 
-        self.configure(fg_color="black")
-
-    def create_widgets(self, parent):
-        for i in range(parent.number_of_days):
-            day_frame = ProgrammingFrame(self)
-            day_frame.pack(side="left", expand=True, fill="both")
-            day_frame.create_widgets(self)
-
-        muscles = MusclesFrame(self)
-        muscles.pack(side="left", expand=True, fill="both")
-        muscles.create_widgets(self)
-
-class MusclesFrame(ctk.CTkFrame):
-    def __init__(self, parent):
-        super().__init__(parent)
-        self.configure(fg_color="red")
-
-    def create_widgets(self, parent):
-        muscles = ["Biceps", "Calves", "Chest", "Glutes", "Hamstrings", "Lats", "Lower back", "Upper back", "Quads", "Delts", "Traps", "Triceps"]
-
-        for i in range(len(muscles)):
-            muscle = ctk.CTkLabel(master=self, text_color="white")
-            muscle.pack()
-            muscle.configure(text=muscles[i])
-        

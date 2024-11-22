@@ -1,5 +1,6 @@
 import customtkinter as ctk
 from main_frame import MainFrame
+# ctk.set_default_color_theme("dark-blue")  # Themes: "blue" (standard), "green", "dark-blue"
 
 class App(ctk.CTk):
     def __init__(self, title, geometry):
@@ -11,7 +12,7 @@ class App(ctk.CTk):
         self.rowconfigure(0, weight=1)
         self.columnconfigure(0, weight=1)
         self._frame = None
-        self.number_of_days = 1
+        self.resizable(width=True, height=True)
 
         self.switch_frame(MainFrame)
 
