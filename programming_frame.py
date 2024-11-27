@@ -1,5 +1,6 @@
 import customtkinter as ctk
 
+
 class ProgrammingFrame(ctk.CTkFrame):
     def __init__(self, parent):
         super().__init__(parent) 
@@ -7,6 +8,8 @@ class ProgrammingFrame(ctk.CTkFrame):
         self.grid_columnconfigure((0,1), weight=1)
         self.grid_rowconfigure((0,1), weight=1)
         self.grid_rowconfigure(2, weight=3)
+
+        self.sql_handler = parent.sql_handler
 
     # create widgets
     def create_widgets(self):
@@ -26,26 +29,43 @@ class ProgrammingFrame(ctk.CTkFrame):
         choice_frame_set = ctk.CTkFrame(self, fg_color="black")
         choice_frame_set.grid_rowconfigure((0,1,2,3,4,5), weight=1)
 
-        # frame with answears 
-        # answear_frame = ctk.CTkFrame(day_frame, fg_color="black")
-        # answear_frame.pack(expand=True, fill="both")
-        # muscle_groups_frame = ctk.CTkFrame(answear_frame, fg_color="black")
-        # muscle_groups_frame.pack(side="left", expand=True, fill="both")
-        # sets_total_frame = ctk.CTkFrame(answear_frame, fg_color="black")
-        # sets_total_frame.pack(side="right", expand=True, fill="both")
-
         # place widgets
         day_lbl.grid(column=0, row=0, columnspan=2, sticky="news")
         ex_lbl.grid(column=0, row=1, sticky="news") 
         st_lbl.grid(column=1, row=1, sticky="news")
         choice_frame_ex.grid(column=0, row=2, sticky="news")
         choice_frame_set.grid(column=1, row=2, sticky="news")
-        
+
+        def setting_total(set, exercise):
+            multiplier_muscle = 
+            # for i in multiplier_muscle:
+            #     i[0] *= int(set)
+            pass
+                
+        def exercises_callback(ex):
+            return self.sql_handler.read_multiplier_muscle(ex)
+
+        def set_callback(set):
+            pass
+
+        exercises_list = self.sql_handler.read_all_exercises()
         for i in range(6):    
-            exercise = ctk.CTkComboBox(master=choice_frame_ex, values=["press", "2", "3", "4", "5", "6"])
-            set = ctk.CTkComboBox(master=choice_frame_set, values=["1", "2", "3", "4", "5"])
+            exercise = ctk.CTkComboBox(master=choice_frame_ex, values=exercises_list, command=exercises_callback)
+            exercise.set("--exercise--")
+            set = ctk.CTkComboBox(master=choice_frame_set, values=["1", "2", "3", "4", "5"], command=setting_total)
+            set.set("--sets--")
             exercise.grid(column=0, row=i, sticky="news")
             set.grid(column=1, row=i, sticky="news")
+
+
+        # for j in range(len(choice_frame_ex.exercises_combo)):
+        #     ex = exercises_combo[j].get()
+        #     s = sets_combo[j].get()
+            # lst = self.sql_handler.read_multiplier_muscle(ex)
+            # for tup in lst:
+            #     wage = tup[0] * s
+            #     print(wage)
+
 
 # setup frame: left side for programming, right for muscles frames
 class EmptyFrame(ctk.CTkFrame):
@@ -54,6 +74,8 @@ class EmptyFrame(ctk.CTkFrame):
         self.configure(fg_color="yellow")
         self.grid_columnconfigure((0), weight=2)
         self.grid_columnconfigure((1), weight=1)
+
+        self.sql_handler = parent.sql_handler
 
     def create_widgets(self, parent):
         programming_side = ProgrammingFrames(self)
@@ -70,6 +92,8 @@ class ProgrammingFrames(ctk.CTkFrame):
         self.configure(fg_color="black")
         self.grid_columnconfigure((0,1), weight=1)
         self.grid_rowconfigure((0,1,2), weight=1)
+
+        self.sql_handler = parent.sql_handler
 
     def create_widgets(self, parent):
         day_frame1 = ProgrammingFrame(self)
@@ -100,9 +124,12 @@ class MuscleFrame(ctk.CTkFrame):
         self.grid_columnconfigure((1), weight=1)
 
     def create_widgets(self, parent):
-        muscles = ["Biceps", "Calves", "Chest", "Glutes", "Hamstrings", "Lats", "Lower back", "Upper back", "Quads", "Delts", "Traps", "Triceps"]
+        muscles = ["Glutes", "Hamstrings", "Quads", "Calves", "Lats", "Lower back", "Upper back",  "Delts", "Traps", "Biceps", "Triceps", "Chest"]
 
         for i in range(len(muscles)):
             muscle = ctk.CTkLabel(master=self, text_color="white")
             muscle.grid(column=0, row=i, sticky="news")
             muscle.configure(text=muscles[i])
+            sets = ctk.CTkLabel(master=self, text_color="white")
+            sets.grid(column=1, row=i, sticky="news")
+            sets.configure(text="0")

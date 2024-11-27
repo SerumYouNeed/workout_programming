@@ -1,5 +1,8 @@
 import customtkinter as ctk
 from main_frame import MainFrame
+from data.sqlite import SQLHandler
+
+
 # ctk.set_default_color_theme("dark-blue")  # Themes: "blue" (standard), "green", "dark-blue"
 
 class App(ctk.CTk):
@@ -13,6 +16,8 @@ class App(ctk.CTk):
         self.columnconfigure(0, weight=1)
         self._frame = None
         self.resizable(width=True, height=True)
+
+        self.sql_handler = SQLHandler()
 
         self.switch_frame(MainFrame)
 

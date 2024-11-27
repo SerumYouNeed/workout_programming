@@ -1,19 +1,43 @@
 import sqlite3
 
-try:
-    connection = sqlite3.connect('data.db')
-    cursor = connection.cursor()
+class SQLHandler:
+    def __init__(self):
+        try:
+            self.connection = sqlite3.connect('data.db')
+            cursor = self.connection.cursor()
 
-    with open('schema.sql', 'r') as schema_file:
-        sql_script = schema_file.read()
+            with open('data/schema.sql', 'r') as schema_file:
+                sql_script = schema_file.read()
 
-    cursor.executescript(sql_script)
-    cursor.close()
+            cursor.executescript(sql_script)
+            cursor.close()
 
-except sqlite3.Error as error:
-    print(f'Error while reading sql script', error)
+        except sqlite3.Error as error:
+            print(f'Error while reading sql script', error)
+            
+        # finally:
+        #     if connection:
+        #         connection.close()
+        #         print('Connection is closed')
+
+    def read_all_exercises(self):
+        cursor = self.connection.cursor()     
+        query = "SELECT DISTINCT exercise FROM exercises;"
+        try:
+            cursor.execute(query)
+            exercises_list = []
+            ex = cursor.fetchall()
+            for i in ex:
+                exercises_list.append(i[0])
+            # connection.close()
+        except sqlite3.Error as error:
+            print(f'Error while reading exercises list', error)
+            cursor.close()
+        return sorted(exercises_list)
     
-finally:
-    if connection:
-        connection.close()
-        print('Connection is closed')
+    def read_multiplier_muscle(self, exercise):
+        cursor = self.connection.cursor()
+        cursor.execute("SELECT multiplier, muscle FROM exercises WHERE exercise == ?", (exercise,) )
+        tup = cursor.fetchall()
+        print(tup)
+        return tup 

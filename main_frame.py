@@ -1,11 +1,15 @@
 import customtkinter as ctk
 from programming_frame import EmptyFrame
 
+
 class MainFrame(ctk.CTkFrame):
     def __init__(self, parent):
         super().__init__(parent) 
         self.configure(fg_color="black")
         self.grid(row=0, column=0, sticky="ewns")
+        
+
+
 
     def create_widgets(self, parent):
         # create widgets
