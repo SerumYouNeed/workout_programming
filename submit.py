@@ -1,20 +1,15 @@
-# import tkinter as tk
-# from tkinter import ttk
+import customtkinter as ctk
 
-# class SubBtn(tk.Button):
-#     def __init__(self, frame):
-#         super().__init__()
-#         self.frame = frame
-#         self.btn = ttk.Button(self.frame, text="Submit")
-#         self.btn.grid(row=2, column=0, columnspan=2, sticky="n")
+class SubBtn(ctk.CTkButton):
+    def __init__(self, parent):
+        super().__init__()
+        self.frame = parent
+        self.btn = ctk.CTkButton(self.frame, text="Submit", command=submit)
+        self.btn.grid(row=3, column=0, columnspan=2, sticky="n")
 
-
-        # def submit():
-        #     frecquency_a = MainWindow.frecquency_selector.get()
-        #     print(f'frequency: {frecquency_a}')
-        #     if self.grittings.winfo_viewable():
-        #         self.grittings.grid_forget()
-
-
-
-    
+        def submit():
+            for i in range(len(parent.combo_exercise_list)):
+                for j in range(len(parent.combo_exercise_list[i])):
+                    parent.combo_exercise_list[i][j] 
+                
+            print(f'frequency: {frecquency_a}')

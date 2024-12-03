@@ -1,12 +1,12 @@
 import customtkinter as ctk
-
+from combobox import ComboBoxExercise, ComboBoxSet
 
 class ProgrammingFrame(ctk.CTkFrame):
     def __init__(self, parent):
         super().__init__(parent) 
         self.configure(fg_color="black")
         self.grid_columnconfigure((0,1), weight=1)
-        self.grid_rowconfigure((0,1), weight=1)
+        self.grid_rowconfigure((0,1,3), weight=1)
         self.grid_rowconfigure(2, weight=3)
 
         self.sql_handler = parent.sql_handler
@@ -37,35 +37,21 @@ class ProgrammingFrame(ctk.CTkFrame):
         choice_frame_set.grid(column=1, row=2, sticky="news")
 
         def setting_total(set, exercise):
-            multiplier_muscle = 
-            # for i in multiplier_muscle:
-            #     i[0] *= int(set)
-            pass
-                
-        def exercises_callback(ex):
-            return self.sql_handler.read_multiplier_muscle(ex)
-
-        def set_callback(set):
-            pass
+            dict_total_per_muscle = dict()
+            for i in range(len(exercise)):
+                dict_total_per_muscle[exercise[i][1]] = exercise[i][0] * set
+            # print(dict_total_per_muscle)
+            return dict_total_per_muscle
 
         exercises_list = self.sql_handler.read_all_exercises()
-        for i in range(6):    
-            exercise = ctk.CTkComboBox(master=choice_frame_ex, values=exercises_list, command=exercises_callback)
+        self.combo_exercise_list = []
+        self.combo_set_list = []
+        for i in range(3):    
+            exercise = ComboBoxExercise(choice_frame_ex, exercises_list, 0, i)
             exercise.set("--exercise--")
-            set = ctk.CTkComboBox(master=choice_frame_set, values=["1", "2", "3", "4", "5"], command=setting_total)
+            set = ComboBoxSet(choice_frame_set, ["1", "2", "3", "4", "5"], 1, i)
             set.set("--sets--")
-            exercise.grid(column=0, row=i, sticky="news")
-            set.grid(column=1, row=i, sticky="news")
-
-
-        # for j in range(len(choice_frame_ex.exercises_combo)):
-        #     ex = exercises_combo[j].get()
-        #     s = sets_combo[j].get()
-            # lst = self.sql_handler.read_multiplier_muscle(ex)
-            # for tup in lst:
-            #     wage = tup[0] * s
-            #     print(wage)
-
+            setting_total(set.sets, exercise.muscle_multiplier)
 
 # setup frame: left side for programming, right for muscles frames
 class EmptyFrame(ctk.CTkFrame):
@@ -95,6 +81,7 @@ class ProgrammingFrames(ctk.CTkFrame):
 
         self.sql_handler = parent.sql_handler
 
+
     def create_widgets(self, parent):
         day_frame1 = ProgrammingFrame(self)
         day_frame2 = ProgrammingFrame(self)
@@ -122,10 +109,11 @@ class MuscleFrame(ctk.CTkFrame):
         self.configure(fg_color="red")
         self.grid_columnconfigure((0), weight=2)
         self.grid_columnconfigure((1), weight=1)
+        self.sql_handler = parent.sql_handler
 
     def create_widgets(self, parent):
-        muscles = ["Glutes", "Hamstrings", "Quads", "Calves", "Lats", "Lower back", "Upper back",  "Delts", "Traps", "Biceps", "Triceps", "Chest"]
 
+        muscles = self.sql_handler.read_all_muscles()
         for i in range(len(muscles)):
             muscle = ctk.CTkLabel(master=self, text_color="white")
             muscle.grid(column=0, row=i, sticky="news")
