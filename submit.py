@@ -11,5 +11,3 @@ class SubBtn(ctk.CTkButton):
             for i in range(len(parent.combo_exercise_list)):
                 for j in range(len(parent.combo_exercise_list[i])):
                     parent.combo_exercise_list[i][j] 
-                
-            print(f'frequency: {frecquency_a}')

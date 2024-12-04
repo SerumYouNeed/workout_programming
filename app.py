@@ -2,9 +2,6 @@ import customtkinter as ctk
 from main_frame import MainFrame
 from data.sqlite import SQLHandler
 
-
-# ctk.set_default_color_theme("dark-blue")  # Themes: "blue" (standard), "green", "dark-blue"
-
 class App(ctk.CTk):
     def __init__(self, title, geometry):
         super().__init__()
@@ -31,8 +28,3 @@ class App(ctk.CTk):
         self._frame = new_frame
         self._frame.pack(fill="both", expand=True)
         self._frame.create_widgets(self)
-        
-        
-        
-
-    

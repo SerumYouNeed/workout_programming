@@ -53,24 +53,7 @@ class ProgrammingFrame(ctk.CTkFrame):
             set.set("--sets--")
             setting_total(set.sets, exercise.muscle_multiplier)
 
-# setup frame: left side for programming, right for muscles frames
-class EmptyFrame(ctk.CTkFrame):
-    def __init__(self, parent):
-        super().__init__(parent) 
-        self.configure(fg_color="yellow")
-        self.grid_columnconfigure((0), weight=2)
-        self.grid_columnconfigure((1), weight=1)
 
-        self.sql_handler = parent.sql_handler
-
-    def create_widgets(self, parent):
-        programming_side = ProgrammingFrames(self)
-        programming_side.grid(column=0, row=0)
-        programming_side.create_widgets(self)
-        muscle_side = MuscleFrame(self)
-        muscle_side.grid(column=1, row=0)
-        muscle_side.create_widgets(self)
-        
 # left side of setup
 class ProgrammingFrames(ctk.CTkFrame):
     def __init__(self, parent):
@@ -101,23 +84,3 @@ class ProgrammingFrames(ctk.CTkFrame):
         day_frame4.create_widgets()
         day_frame5.create_widgets()
         day_frame6.create_widgets()
-
-# right side of setup
-class MuscleFrame(ctk.CTkFrame):
-    def __init__(self, parent):
-        super().__init__(parent)
-        self.configure(fg_color="red")
-        self.grid_columnconfigure((0), weight=2)
-        self.grid_columnconfigure((1), weight=1)
-        self.sql_handler = parent.sql_handler
-
-    def create_widgets(self, parent):
-
-        muscles = self.sql_handler.read_all_muscles()
-        for i in range(len(muscles)):
-            muscle = ctk.CTkLabel(master=self, text_color="white")
-            muscle.grid(column=0, row=i, sticky="news")
-            muscle.configure(text=muscles[i])
-            sets = ctk.CTkLabel(master=self, text_color="white")
-            sets.grid(column=1, row=i, sticky="news")
-            sets.configure(text="0")
