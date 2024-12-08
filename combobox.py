@@ -4,22 +4,19 @@ from data.sqlite import SQLHandler
 class ComboBoxExercise(ctk.CTkComboBox):
     def __init__(self, parent, val, col, row):
         super().__init__(parent)
+        # in what proportion what muscle are working during given exercise
         self.muscle_multiplier = {}
         
         self.sql_handler = SQLHandler()
 
-        # set muscle: multiplier dict taking an exercise from combo
-        def combo_callbacks(input):
-            exercise = ex_callback(input)
-            for i in range(len(exercise)):
-                self.muscle_multiplier[exercise[i][1]] = exercise[i][0]
-            parent.combo_exercise_list.append(self.muscle_multiplier)
-        
-        # return list of tuples (multiplier, muscle)
+        # handler return list of tuples (multiplier, muscle)
         def ex_callback(exercise):
-            return self.sql_handler.read_multiplier_muscle(exercise)
+            lst = self.sql_handler.read_multiplier_muscle(exercise)
+            # loop sets muscle_multiplier dict 
+            for i in range(len(lst)):
+                self.muscle_multiplier[lst[i][1]] = lst[i][0]
             
-        self.combo = ctk.CTkComboBox(master=parent, values=val, command=combo_callbacks)
+        self.combo = ctk.CTkComboBox(master=parent, values=val, command=ex_callback)
         self.combo.grid(column=col, row=row, sticky="news")
 
 class ComboBoxSet(ctk.CTkComboBox):
@@ -30,7 +27,7 @@ class ComboBoxSet(ctk.CTkComboBox):
         self.sql_handler = SQLHandler()
 
         def set_callback(set):
-            self.sets = set
+            self.sets = int(set)
             
         self.combo = ctk.CTkComboBox(master=parent, values=val, command=set_callback)
         self.combo.grid(column=col, row=row, sticky="news")

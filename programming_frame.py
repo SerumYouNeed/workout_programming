@@ -1,13 +1,18 @@
 import customtkinter as ctk
 from combobox import ComboBoxExercise, ComboBoxSet
+from submit import SubBtn
 
 class ProgrammingFrame(ctk.CTkFrame):
     def __init__(self, parent):
         super().__init__(parent) 
         self.configure(fg_color="black")
         self.grid_columnconfigure((0,1), weight=1)
-        self.grid_rowconfigure((0,1,3), weight=1)
+        self.grid_rowconfigure((0,1,3,4), weight=1)
         self.grid_rowconfigure(2, weight=3)
+        root = self.winfo_toplevel()
+        # list of muscles load per frame
+        self.muscles_load = []
+        # self.muscle_multiplier = {}
 
         self.sql_handler = parent.sql_handler
 
@@ -22,6 +27,7 @@ class ProgrammingFrame(ctk.CTkFrame):
         st_lbl = ctk.CTkLabel(master=self, text="Sets",
                               fg_color="black",
                               text_color="white")
+        btn = SubBtn(self)
         
         # frame with choices
         choice_frame_ex = ctk.CTkFrame(self, fg_color="black")
@@ -35,13 +41,7 @@ class ProgrammingFrame(ctk.CTkFrame):
         st_lbl.grid(column=1, row=1, sticky="news")
         choice_frame_ex.grid(column=0, row=2, sticky="news")
         choice_frame_set.grid(column=1, row=2, sticky="news")
-
-        def setting_total(set, exercise):
-            dict_total_per_muscle = dict()
-            for i in range(len(exercise)):
-                dict_total_per_muscle[exercise[i][1]] = exercise[i][0] * set
-            # print(dict_total_per_muscle)
-            return dict_total_per_muscle
+        btn.grid(row=3, column=0, columnspan=2, sticky="n")
 
         exercises_list = self.sql_handler.read_all_exercises()
         self.combo_exercise_list = []
@@ -51,7 +51,7 @@ class ProgrammingFrame(ctk.CTkFrame):
             exercise.set("--exercise--")
             set = ComboBoxSet(choice_frame_set, ["1", "2", "3", "4", "5"], 1, i)
             set.set("--sets--")
-            setting_total(set.sets, exercise.muscle_multiplier)
+            set.bind("<<ComboboxSelected>>", setting_muscles_load(set.sets, exercise))
 
 
 # left side of setup

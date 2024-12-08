@@ -9,8 +9,6 @@ class EmptyFrame(ctk.CTkFrame):
         self.configure(fg_color="yellow")
         self.grid_columnconfigure((0), weight=2)
         self.grid_columnconfigure((1), weight=1)
-        root = self.winfo_toplevel()
-        print(type(root))
 
         self.sql_handler = parent.sql_handler
 
