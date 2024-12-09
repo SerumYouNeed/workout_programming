@@ -1,5 +1,5 @@
 import customtkinter as ctk
-from choice_frame_ex import ChoiceFrame
+from choice_frame import ChoiceFrame
 
 class ProgrammingFrame(ctk.CTkFrame):
     def __init__(self, parent):
@@ -41,20 +41,8 @@ class ProgrammingFrames(ctk.CTkFrame):
 
     def create_widgets(self, parent):
         day_frame1 = ProgrammingFrame(self)
-        # day_frame2 = ProgrammingFrame(self)
-        # day_frame3 = ProgrammingFrame(self)
-        # day_frame4 = ProgrammingFrame(self)
-        # day_frame5 = ProgrammingFrame(self)
-        # day_frame6 = ProgrammingFrame(self)
+        
         day_frame1.grid(row=0, column=0, sticky="news")
-        # day_frame2.grid(row=0, column=1, sticky="news")
-        # day_frame3.grid(row=1, column=0, sticky="news")
-        # day_frame4.grid(row=1, column=1, sticky="news")
-        # day_frame5.grid(row=2, column=0, sticky="news")
-        # day_frame6.grid(row=2, column=1, sticky="news")
+        
         day_frame1.create_widgets()
-        # day_frame2.create_widgets()
-        # day_frame3.create_widgets()
-        # day_frame4.create_widgets()
-        # day_frame5.create_widgets()
-        # day_frame6.create_widgets()
+        
