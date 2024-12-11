@@ -8,26 +8,25 @@ class ChoiceFrame(ctk.CTkFrame):
         self.grid_columnconfigure((0,1), weight=1)
 
         self.sql_handler = SQLHandler()
-        self.muscle_multiplier = {}
         self.exercises_list = self.sql_handler.read_all_exercises()
-        self.sets = None
 
-    def create_widgets(self):
+    def create_widgets(self, parent):
         def ex_callback(ex):
             lst = self.sql_handler.read_multiplier_muscle(ex)
             # loop sets muscle_multiplier dict 
             for i in range(len(lst)):
-                self.muscle_multiplier[lst[i][1]] = lst[i][0]
-            print(self.muscle_multiplier)
+                parent.muscle_multiplier[lst[i][1]] = lst[i][0]
+            print(parent.muscle_multiplier)
 
         def set_callback(set):
-            self.sets = int(set)
+            parent.sets = int(set)
 
         def both_callback(sets):
             set_callback(sets)
-            if self.sets != None:
-                for key, value in self.muscle_multiplier.items():
-                    self.muscle_multiplier[key] = value * self.sets
+            if parent.sets != None:
+                for key, value in parent.muscle_multiplier.items():
+                    parent.muscle_multiplier[key] = value * parent.sets
+            print(parent.muscle_multiplier)
 
         combo_ex = ctk.CTkComboBox(master=self, values=self.exercises_list, command=ex_callback)
         combo_ex.grid(column=0, row=0)
