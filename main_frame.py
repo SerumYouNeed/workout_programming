@@ -29,6 +29,7 @@ class MainFrame(ctk.CTkFrame):
                                  text_color="white",
                                  font=("Helvatica", 22))
         def nextBtn_callback():
+            parent.number_of_training_days = int(frecquency_selector.get())
             parent.switch_frame(EmptyFrame)
                     
         next_btn = ctk.CTkButton(self,

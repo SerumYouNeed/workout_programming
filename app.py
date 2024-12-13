@@ -13,6 +13,7 @@ class App(ctk.CTk):
         self.columnconfigure(0, weight=1)
         self._frame = None
         self.resizable(width=True, height=True)
+        self.number_of_training_days = None
 
         self.sql_handler = SQLHandler()
 
