@@ -41,20 +41,7 @@ class EmptyFrame(ctk.CTkFrame):
                     self.total_sets_list[i].configure(text=amount)
         self.muscle_multiplier = {}
 
-        
-
     def create_widgets(self, parent):
-
-        class MyBtn(ctk.CTkButton):
-            def __init__(self, btn_parent, column_index):
-                super().__init__(btn_parent, column_index)
-                self.column_index = column_index
-
-                def btn_add_ex_callback(self, btn_parent):
-                    ex_label = ctk.CTkLabel(self, text=btn_parent.exercise)
-                    ex_label.grid(column=self.column_index)
-
-                self.btn = ctk.CTkButton(self, command=lambda: btn_add_ex_callback(self, btn_parent))
 
         def ex_callback(ex):
             self.exercise = ex
@@ -88,5 +75,20 @@ class EmptyFrame(ctk.CTkFrame):
         for i in range(parent.number_of_training_days):
             day_lbl = ctk.CTkLabel(master=trainig_program_frame, text="Day " + str(i + 1), anchor="s")
             day_lbl.grid(column=i, row=0)
-            add_ex = MyBtn(trainig_program_frame, i)
-            add_ex.grid(column=add_ex.column_index)
+            MyBtn(trainig_program_frame, i)        
+
+class MyBtn(ctk.CTkButton):
+    def __init__(self, master, column):
+        super().__init__(master)
+        self.row = 2
+
+        def btn_add_ex_callback():
+            # self: button, master: training_program_frame, master.master: empty_frame
+            ex_label = ctk.CTkLabel(master=master, text=master.master.exercise)
+            ex_label.grid(column=column, row=self.row)
+            self.row += 1
+
+        btn = ctk.CTkButton(master=master, command=btn_add_ex_callback)
+        btn.grid(row=1, column=column)
+        
+
