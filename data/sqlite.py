@@ -50,3 +50,9 @@ class SQLHandler:
         cursor.execute("SELECT multiplier, muscle FROM exercises WHERE exercise == ?", (exercise,) )
         tup = cursor.fetchall()
         return tup 
+    
+    # def create_exercise_set_table(self, days):
+    #     cursor = self.connection.cursor()
+    #     for i in range(1, days+1):
+    #         tbl_name = f"day_{i}"
+    #         cursor.execute("CREATE TABLE IF NOT EXISTS {} (id INTEGER PRIMARY KEY, exercise TEXT NOT NULL, sets INTEGER NOT NULL,)".format(tbl_name))

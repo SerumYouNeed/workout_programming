@@ -1,5 +1,7 @@
 import customtkinter as ctk
 from empty_frame import EmptyFrame
+from data.sqlite import SQLHandler
+
 
 
 class MainFrame(ctk.CTkFrame):
@@ -7,6 +9,8 @@ class MainFrame(ctk.CTkFrame):
         super().__init__(parent) 
         self.configure(fg_color="black")
         self.grid(row=0, column=0, sticky="ewns")
+        self.sql_handler = SQLHandler()
+
 
     def create_widgets(self, parent):
         # create widgets
@@ -30,6 +34,7 @@ class MainFrame(ctk.CTkFrame):
                                  font=("Helvatica", 22))
         def nextBtn_callback():
             parent.number_of_training_days = int(frecquency_selector.get())
+            # self.sql_handler.create_exercise_set_table(parent.number_of_training_days)
             parent.switch_frame(EmptyFrame)
                     
         next_btn = ctk.CTkButton(self,

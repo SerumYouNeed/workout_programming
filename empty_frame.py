@@ -18,64 +18,53 @@ class EmptyFrame(ctk.CTkFrame):
         self.exercise = None
         self.exercises_list = self.sql_handler.read_all_exercises()
 
-    def btn_delete_sets_callback(self):
-        for k, v in self.muscle_multiplier.items():
-            for i in range(len(self.muscles)):
-                if self.muscles[i] == k:
-                    label = self.total_sets_list[i]
-                    amount = float(label.cget('text'))
-                    amount -= v
-                    self.total_sets_list[i].configure(text=amount)
-        self.muscle_multiplier = {}
+    # def btn_delete_sets_callback(self):
+    #     for k, v in self.muscle_multiplier.items():
+    #         for i in range(len(self.muscles)):
+    #             if self.muscles[i] == k:
+    #                 label = self.total_sets_list[i]
+    #                 amount = float(label.cget('text'))
+    #                 amount -= v
+    #                 self.total_sets_list[i].configure(text=amount)
+    #     self.muscle_multiplier = {}
 
-    def btn_callback(self):
-        for k, v in self.muscle_multiplier.items():
-            for i in range(len(self.muscles)):
-                if self.muscles[i] == k:
-                    label = self.total_sets_list[i]
-                    print(label)
-                    amount = float(label.cget('text'))
-                    amount += v
-                    print(amount)
-                    print(amount)
-                    self.total_sets_list[i].configure(text=amount)
-        self.muscle_multiplier = {}
+    # def btn_callback(self):
+    #     for k, v in self.muscle_multiplier.items():
+    #         for i in range(len(self.muscles)):
+    #             if self.muscles[i] == k:
+    #                 label = self.total_sets_list[i]
+    #                 print(label)
+    #                 amount = float(label.cget('text'))
+    #                 amount += v
+    #                 print(amount)
+    #                 print(amount)
+    #                 self.total_sets_list[i].configure(text=amount)
+    #     self.muscle_multiplier = {}
 
     def create_widgets(self, parent):
-
-        def ex_callback(ex):
-            self.exercise = ex
-            print(self.exercise)
-        combo_ex = ctk.CTkComboBox(master=self, values=self.exercises_list, command=ex_callback)
-        combo_ex.grid()
     
-        for i in range(len(self.muscles)):
-            muscle = ctk.CTkLabel(master=self, text_color="red")
-            muscle.grid(column=1, row=i, sticky="news")
-            muscle.configure(text=self.muscles[i])
-            sets = ctk.CTkLabel(master=self, text_color="red")
-            sets.grid(column=2, row=i, sticky="news")
-            sets.configure(text="0")
-            self.total_sets_list.append(sets)
+        # for i in range(len(self.muscles)):
+        #     muscle = ctk.CTkLabel(master=self, text_color="red")
+        #     muscle.grid(column=1, row=i, sticky="news")
+        #     muscle.configure(text=self.muscles[i])
+        #     sets = ctk.CTkLabel(master=self, text_color="red")
+        #     sets.grid(column=2, row=i, sticky="news")
+        #     sets.configure(text="0")
+        #     self.total_sets_list.append(sets)
 
         programming_side = ChoiceFrame(self)
         programming_side.grid(column=0)
         programming_side.create_widgets(self)
 
-        btn = ctk.CTkButton(self, text="Count sets", command=self.btn_callback)
-        btn.grid(column=0)
-
-        btn_delete_sets = ctk.CTkButton(self, text="Delete sets", command=self.btn_delete_sets_callback)
-        btn_delete_sets.grid(column=0)
-
         trainig_program_frame = ctk.CTkFrame(self)
         trainig_program_frame.configure(fg_color="pink")
-        trainig_program_frame["columns"] = list(range(0, parent.number_of_training_days))
+        trainig_program_frame["columns"] = list(range(0, parent.number_of_training_days * 2))
         trainig_program_frame.grid()
         for i in range(parent.number_of_training_days):
-            day_lbl = ctk.CTkLabel(master=trainig_program_frame, text="Day " + str(i + 1), anchor="s")
-            day_lbl.grid(column=i, row=0)
-            MyBtn(trainig_program_frame, i)        
+            day_lbl = ctk.CTkLabel(master=trainig_program_frame, text="Day " + str(i + 1), font=("Helvatica", 22))
+            # set label and button on every other column
+            day_lbl.grid(column=i*2, row=0, columnspan=2)
+            MyBtn(trainig_program_frame, i*2)        
 
 class MyBtn(ctk.CTkButton):
     def __init__(self, master, column):
@@ -84,11 +73,19 @@ class MyBtn(ctk.CTkButton):
 
         def btn_add_ex_callback():
             # self: button, master: training_program_frame, master.master: empty_frame
-            ex_label = ctk.CTkLabel(master=master, text=master.master.exercise)
-            ex_label.grid(column=column, row=self.row)
+            sets = "sets"
+            if master.master.sets == 1:
+                sets = "set"
+            lbl_txt = f"{master.master.exercise} - {master.master.sets} {sets}"
+            ex_label = ctk.CTkLabel(master=master, text=lbl_txt, font=("Helvatica", 18))
+            delete_btn = ctk.CTkButton(master=master, text="X", width=15, height=15, text_color="black", fg_color="tomato", hover_color="red")
+            
+            ex_label.grid(column=column+1, row=self.row)
+            
+            delete_btn.grid(column=column, row=self.row, padx=5, pady=3)
             self.row += 1
 
-        btn = ctk.CTkButton(master=master, command=btn_add_ex_callback)
-        btn.grid(row=1, column=column)
+        btn = ctk.CTkButton(master=master, text="Add exercise", width=100, height=22, fg_color="PaleGreen3", hover_color="green3", text_color="black",command=btn_add_ex_callback)
+        btn.grid(row=1, column=column, columnspan=2, ipadx=10, ipady=3)
         
 
