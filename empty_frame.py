@@ -2,7 +2,6 @@ import customtkinter as ctk
 from choice_frame import ChoiceFrame
 from data.sqlite import SQLHandler
 
-# setup frame: left side for comboboxes with exercises and sets selectors, right for muscles frames
 class EmptyFrame(ctk.CTkFrame):
     def __init__(self, parent):
         super().__init__(parent) 
@@ -17,6 +16,8 @@ class EmptyFrame(ctk.CTkFrame):
         self.day = "1"
         self.exercise = None
         self.exercises_list = self.sql_handler.read_all_exercises()
+        # daily_routines: {Day i: [{exercise : sets}, ...]}
+        self.daily_routines = dict()
 
     # def btn_delete_sets_callback(self):
     #     for k, v in self.muscle_multiplier.items():
@@ -61,6 +62,8 @@ class EmptyFrame(ctk.CTkFrame):
         trainig_program_frame["columns"] = list(range(0, parent.number_of_training_days * 2))
         trainig_program_frame.grid()
         for i in range(parent.number_of_training_days):
+            day_name = f"Day {i+1}"
+            self.daily_routines[day_name] = list()
             day_lbl = ctk.CTkLabel(master=trainig_program_frame, text="Day " + str(i + 1), font=("Helvatica", 22))
             # set label and button on every other column
             day_lbl.grid(column=i*2, row=0, columnspan=2)
@@ -79,11 +82,13 @@ class MyBtn(ctk.CTkButton):
             lbl_txt = f"{master.master.exercise} - {master.master.sets} {sets}"
             ex_label = ctk.CTkLabel(master=master, text=lbl_txt, font=("Helvatica", 18))
             delete_btn = ctk.CTkButton(master=master, text="X", width=15, height=15, text_color="black", fg_color="tomato", hover_color="red")
-            
-            ex_label.grid(column=column+1, row=self.row)
-            
+            # add exercise: sets to master.master.daily_routines dict
+            dict_key = f"Day {int(column/2 + 1)}"
+            master.master.daily_routines[dict_key].append({master.master.exercise:master.master.sets})
+            ex_label.grid(column=column+1, row=self.row) 
             delete_btn.grid(column=column, row=self.row, padx=5, pady=3)
             self.row += 1
+            print(master.master.daily_routines)
 
         btn = ctk.CTkButton(master=master, text="Add exercise", width=100, height=22, fg_color="PaleGreen3", hover_color="green3", text_color="black",command=btn_add_ex_callback)
         btn.grid(row=1, column=column, columnspan=2, ipadx=10, ipady=3)
