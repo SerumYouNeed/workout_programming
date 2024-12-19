@@ -1,5 +1,5 @@
-# workout_programming
-Desktop version of workout creator. This app will help to count your working set and prevent you from under / overtraining muscle groups.
+# Workout programming
+Desktop version of workout creator. This app will help to count your working set and prevent you from under / overtraining muscle groups. You can use predefined exercises or add your own. You can use one of predefined training split or create your custom routine. Save your program or print it from the app.  
 
 
 ## Table of Contents
