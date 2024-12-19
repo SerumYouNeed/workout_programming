@@ -1,5 +1,5 @@
 # Workout programming
-Desktop version of workout creator. This app is your best training partner you ever have. While you focusing on making gains the app will do necessary heavy lifting with background math - it will help to count your working set and prevent you from under / overtraining muscle groups keeping track of load balance. You can use predefined exercises from app database or add your own. You can use one of predefined training splits or create your custom routine. Save your program or print it from the app and you are ready to go!
+Desktop version of workout creator. This app is the best training partner you’ll ever have. While you're focused on making gains, it handles the heavy lifting behind the scenes with the necessary calculations. It helps you track your working sets, prevents you from under- or overtraining muscle groups, and keeps your load balance in check. You can choose from a database of predefined exercises or add your own. Use one of the ready-made training splits, or create a custom routine tailored to your goals. Save your program or print it directly from the app – and you’re all set to go!
 
 
 ## Table of Contents
