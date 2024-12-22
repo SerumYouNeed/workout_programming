@@ -7,6 +7,7 @@ Desktop version of workout creator. This app is the best training partner you’
 * [Quick Start]
 * [Usage]
 * [Technologies Used]
+* [Contributing]
 * [Project Status]
 * [Room for Improvement]
 
@@ -19,7 +20,6 @@ But I’m a reasonable person, and I don't want to waste my time on ineffective 
 
 ## Quick Start
 Python 3.10.12 or higher is required
-
 
 
 ## Usage
@@ -37,6 +37,9 @@ Full list of technololgies are listed in "requirements.txt" file inside project 
 - Python 3.10.12
 - Tkinter
 - SQLite3
+
+
+## Contributing
 
 
 ## Project Status
