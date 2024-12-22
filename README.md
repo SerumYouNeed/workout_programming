@@ -4,9 +4,9 @@ Desktop version of workout creator. This app is the best training partner you’
 
 ## Table of Contents
 * [Motivation]
-* [Technologies Used]
-* [Features]
+* [Quick Start]
 * [Usage]
+* [Technologies Used]
 * [Project Status]
 * [Room for Improvement]
 
@@ -17,21 +17,26 @@ The gym is an important part of my life. Twenty years ago, it was simple – go 
 But I’m a reasonable person, and I don't want to waste my time on ineffective routines. So, I tried this method, that method, still watching "doctors," but the voice in the back of my head killed all the joy of training. I had enough. That’s when the idea of "Workout Programming" hit me. What if I had a tool that could calculate the necessary numbers and keep track of them for me? Maybe the pure joy of training will return...
 
 
+## Quick Start
+Python 3.10.12 or higher is required
+
+
+
+## Usage
+The app is designed to be highly intuitive. Each question on the screen guides you seamlessly to the next step. When you open the app, you'll first be asked to select how many days per week you'd like to train. Based on your input, the app will generate tables tailored to different days.  
+
+At the top of the screen, you'll find a dropdown box where you can select an exercise and specify the number of sets to perform. Once you've chosen, simply add the exercise to your desired day using the "Add" button.  
+
+When all your training days are filled with selected exercises, you can calculate the weekly load for each muscle group. If you're not satisfied with the results, you can customize your routine further.  
+
+After finalizing your workout plan, you can save it, print it, or revisit it later. 
+
+
 ## Technologies Used
 Full list of technololgies are listed in "requirements.txt" file inside project file. 
 - Python 3.10.12
 - Tkinter
 - SQLite3
-
-
-## Features
-- Choose between different training splits.
-- Select exercises for different training days.
-- Calculate weekly load for muscle group.
-
-
-## Usage
-It works very intuitively. Every question on the screen will lead you to the next. 
 
 
 ## Project Status
@@ -42,8 +47,6 @@ Project is: _in progress_
 I believe there are many features to improve.
 
 Room for improvement:
-- Graphics are very simple
-- Migrate database online
 - Adding own exercise to the database
 - Graphics for exercises 
 
