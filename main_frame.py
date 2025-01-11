@@ -47,7 +47,6 @@ class MainFrame(ctk.CTkFrame):
                                  command=nextBtn_callback) 
                
         def combobox_callback(choice):
-            # instructions.delete()
             match choice:
                 case "1":
                     instructions.configure(text="One day a week is usually not enough - but hey, it is still better that none.\nPick max 7 exercises from dropdown menu below. Number of exercises is not random.\nYou can pick less and adjust later.")
