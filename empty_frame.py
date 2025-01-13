@@ -52,6 +52,8 @@ class MyBtn(ctk.CTkButton):
 
         def btn_del_ex_callback():
             pass   # <<<------ praca nad usuwaniem frame`a`
+            ex_label.destroy()
+            self.destroy()
 
         def btn_add_ex_callback():
             frame = DelExSetFrame(master, column)
