@@ -18,9 +18,13 @@ But I’m a reasonable person, and I don't want to waste my time on ineffective 
 
 
 ## Quick Start
-Python 3.10.12 or higher is required.
-Using your terminal of choice navigate to the folder where the downloaded files are located.
-Type:
+Python 3.10.12 or higher is required.  
+For Git owners: using your terminal navigate to destination folder and type
+```
+git clone https://github.com/SerumYouNeed/workout_programming.git
+```
+If you do not have Git but want to - check out **[Getting Started - Installing Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)** site.  
+You can also download zip file. Once unpacked, using your terminal of choice navigate to the folder where the downloaded files are located and type:
 ```
 python3 main.py
 ```
