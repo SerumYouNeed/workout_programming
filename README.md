@@ -21,9 +21,9 @@ But I’m a reasonable person, and I don't want to waste my time on ineffective 
 Python 3.10.12 or higher is required.
 Using your terminal of choice navigate to the folder where the downloaded files are located.
 Type:
-'''
+```
 python3 main.py
-'''
+```
 
 
 ## Usage
