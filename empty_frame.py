@@ -5,7 +5,7 @@ from data.sqlite import SQLHandler
 class EmptyFrame(ctk.CTkFrame):
     def __init__(self, parent):
         super().__init__(parent) 
-        self.configure(fg_color="yellow")
+        self.configure(fg_color="black")
         self.grid_columnconfigure((0,1,2), weight=1)
 
         self.sql_handler = SQLHandler()
@@ -50,10 +50,6 @@ class MyBtn(ctk.CTkButton):
         super().__init__(master)
         self.row = 2
 
-        def btn_del_ex_callback():
-            pass   # <<<------ praca nad usuwaniem frame`a`
-            ex_label.destroy()
-            self.destroy()
 
         def btn_add_ex_callback():
             frame = DelExSetFrame(master, column)
@@ -68,6 +64,12 @@ class MyBtn(ctk.CTkButton):
             master.master.daily_routines[dict_key].append({master.master.exercise:master.master.sets})
 
             ex_label = ctk.CTkLabel(master=frame, text=lbl_txt, font=("Helvatica", 18))
+
+            def btn_del_ex_callback():
+                ex_label.destroy()
+                delete_btn.destroy()
+                frame.destroy()
+
             delete_btn = ctk.CTkButton(master=frame, text="X", width=15, height=15, text_color="black", fg_color="tomato", hover_color="red", command=btn_del_ex_callback)
             ex_label.grid(column=1, row=0, padx=5, pady=3) 
             delete_btn.grid(column=0, row=0, padx=5, pady=3)
@@ -75,6 +77,7 @@ class MyBtn(ctk.CTkButton):
 
             self.row += 1
             print(master.master.daily_routines)
+
 
         btn = ctk.CTkButton(master=master, text="Add exercise", width=100, height=22, fg_color="PaleGreen3", hover_color="green3", text_color="black",command=btn_add_ex_callback)
         btn.grid(row=1, column=column, ipadx=10, ipady=3)
