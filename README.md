@@ -7,7 +7,6 @@ Desktop version of workout creator. This app is the best training partner you’
 * [Quick Start]
 * [Usage]
 * [Technologies Used]
-* [Contributing]
 * [Project Status]
 * [Room for Improvement]
 
@@ -19,7 +18,16 @@ But I’m a reasonable person, and I don't want to waste my time on ineffective 
 
 
 ## Quick Start
-Python 3.10.12 or higher is required
+Python 3.10.12 or higher is required.  
+For Git owners: using your terminal navigate to destination folder and type
+```
+git clone https://github.com/SerumYouNeed/workout_programming.git
+```
+If you do not have Git but want to - check out **[Getting Started - Installing Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)** site.  
+You can also download zip file. Once unpacked, using your terminal of choice navigate to the folder where the downloaded files are located and type:
+```
+python3 main.py
+```
 
 
 ## Usage
@@ -37,9 +45,6 @@ Full list of technololgies are listed in "requirements.txt" file inside project 
 - Python 3.10.12
 - Tkinter
 - SQLite3
-
-
-## Contributing
 
 
 ## Project Status
