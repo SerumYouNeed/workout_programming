@@ -1,6 +1,7 @@
 import customtkinter as ctk
 from choice_frame import ChoiceFrame
 from data.sqlite import SQLHandler
+from muscle_frame import MuscleFrame
 
 class EmptyFrame(ctk.CTkFrame):
     def __init__(self, parent):
@@ -24,6 +25,8 @@ class EmptyFrame(ctk.CTkFrame):
         self.total_load_per_muscle = dict()
 
     def create_widgets(self, parent):
+        self.new_muscle_frame = MuscleFrame(self)
+        self.new_muscle_frame.grid(column=2)
 
         programming_side = ChoiceFrame(self)
         programming_side.grid(column=0)
@@ -65,6 +68,9 @@ class MyBtn(ctk.CTkButton):
             # add exercise: sets to master.master.daily_routines dict
             dict_key = f"Day {int(column + 1)}"
             master.master.daily_routines[dict_key].append({master.master.exercise:master.master.sets})
+            
+            # create right side with total load
+            master.master.new_muscle_frame.create_widgets()
 
             ex_label = ctk.CTkLabel(master=frame, text=lbl_txt, font=("Helvatica", 18))
 
