@@ -25,9 +25,6 @@ class EmptyFrame(ctk.CTkFrame):
         self.total_load_per_muscle = dict()
 
     def create_widgets(self, parent):
-        self.new_muscle_frame = MuscleFrame(self)
-        self.new_muscle_frame.grid(column=2)
-
         programming_side = ChoiceFrame(self)
         programming_side.grid(column=0)
         programming_side.create_widgets(self)
@@ -43,6 +40,10 @@ class EmptyFrame(ctk.CTkFrame):
             # set label and button on every other column
             day_lbl.grid(column=i, row=0)
             MyBtn(trainig_program_frame, i)  
+
+        self.new_muscle_frame = MuscleFrame(self)
+        self.new_muscle_frame.grid(column=2)
+        self.new_muscle_frame.create_widgets()
 
 class DelExSetFrame(ctk.CTkFrame):
     def __init__(self, parent, column):
@@ -70,7 +71,7 @@ class MyBtn(ctk.CTkButton):
             master.master.daily_routines[dict_key].append({master.master.exercise:master.master.sets})
             
             # create right side with total load
-            master.master.new_muscle_frame.create_widgets()
+            master.master.new_muscle_frame.update_table_total_load(master.master)
 
             ex_label = ctk.CTkLabel(master=frame, text=lbl_txt, font=("Helvatica", 18))
 
