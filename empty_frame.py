@@ -42,7 +42,7 @@ class EmptyFrame(ctk.CTkFrame):
             MyBtn(trainig_program_frame, i)  
 
         self.new_muscle_frame = MuscleFrame(self)
-        self.new_muscle_frame.grid(column=2)
+        self.new_muscle_frame.grid(column=2, sticky='NSEW')
         self.new_muscle_frame.create_widgets()
 
 class DelExSetFrame(ctk.CTkFrame):
@@ -70,9 +70,6 @@ class MyBtn(ctk.CTkButton):
             dict_key = f"Day {int(column + 1)}"
             master.master.daily_routines[dict_key].append({master.master.exercise:master.master.sets})
             
-            # create right side with total load
-            master.master.new_muscle_frame.update_table_total_load(master.master)
-
             ex_label = ctk.CTkLabel(master=frame, text=lbl_txt, font=("Helvatica", 18))
 
             def btn_del_ex_callback():
@@ -106,6 +103,9 @@ class MyBtn(ctk.CTkButton):
                 else:
                     master.master.total_load_per_muscle[muscle] = total_load
             print(master.master.total_load_per_muscle)
+            
+            # update right side with total load
+            master.master.new_muscle_frame.update_table_total_load(master.master)
 
         btn = ctk.CTkButton(master=master, text="Add exercise", width=100, height=22, fg_color="PaleGreen3", hover_color="green3", text_color="black",command=btn_add_ex_callback)
         btn.grid(row=1, column=column, ipadx=10, ipady=3)

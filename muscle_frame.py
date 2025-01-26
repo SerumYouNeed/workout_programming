@@ -10,7 +10,6 @@ class MuscleFrame(ctk.CTkFrame):
         self.entry.grid()
 
     def update_table_total_load(self, parent):
-        print(parent.total_load_per_muscle)
         entry_label_full = ""
         for k, v in parent.total_load_per_muscle.items():
             if v > 1:
