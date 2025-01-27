@@ -30,25 +30,27 @@ class EmptyFrame(ctk.CTkFrame):
         programming_side.create_widgets(self)
 
         trainig_program_frame = ctk.CTkFrame(self)
-        trainig_program_frame.configure(fg_color="pink")
+        trainig_program_frame.configure(fg_color="black")
         trainig_program_frame["columns"] = list(range(0, parent.number_of_training_days * 2))
         trainig_program_frame.grid()
         for i in range(parent.number_of_training_days):
             day_name = f"Day {i+1}"
             self.daily_routines[day_name] = list()
-            day_lbl = ctk.CTkLabel(master=trainig_program_frame, text="Day " + str(i + 1), font=("Helvatica", 22))
+            day_lbl = ctk.CTkLabel(master=trainig_program_frame, 
+                                   text="Day " + str(i + 1), 
+                                   font=("Helvatica", 22),
+                                   text_color="white")
             # set label and button on every other column
             day_lbl.grid(column=i, row=0)
             MyBtn(trainig_program_frame, i)  
 
         self.new_muscle_frame = MuscleFrame(self)
-        self.new_muscle_frame.grid(column=2, sticky='NSEW')
-        self.new_muscle_frame.create_widgets()
+        self.new_muscle_frame.grid(column=2, row=0, rowspan=5, sticky='NSEW')
 
 class DelExSetFrame(ctk.CTkFrame):
     def __init__(self, parent, column):
         super().__init__(parent)  
-        self.configure(fg_color="white")
+        self.configure(fg_color="black")
         self.grid_columnconfigure(2)    
 
 class MyBtn(ctk.CTkButton):
@@ -70,7 +72,10 @@ class MyBtn(ctk.CTkButton):
             dict_key = f"Day {int(column + 1)}"
             master.master.daily_routines[dict_key].append({master.master.exercise:master.master.sets})
             
-            ex_label = ctk.CTkLabel(master=frame, text=lbl_txt, font=("Helvatica", 18))
+            ex_label = ctk.CTkLabel(master=frame, 
+                                    text=lbl_txt, 
+                                    font=("Helvatica", 18),
+                                    text_color="white")
 
             def btn_del_ex_callback():
                 # delete load from total load dict from empty_frame
@@ -107,7 +112,16 @@ class MyBtn(ctk.CTkButton):
             # update right side with total load
             master.master.new_muscle_frame.update_table_total_load(master.master)
 
-        btn = ctk.CTkButton(master=master, text="Add exercise", width=100, height=22, fg_color="PaleGreen3", hover_color="green3", text_color="black",command=btn_add_ex_callback)
+        btn = ctk.CTkButton(master=master, 
+                            text="Add exercise", 
+                            width=100, 
+                            height=22, 
+                            font=("Helvatica", 15),
+                            text_color="white",
+                            fg_color="gray15",
+                            corner_radius=8,
+                            hover_color="gray18",
+                            command=btn_add_ex_callback)
         btn.grid(row=1, column=column, ipadx=10, ipady=3)
         
 
