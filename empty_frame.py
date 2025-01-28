@@ -75,7 +75,7 @@ class MyBtn(ctk.CTkButton):
             ex_label = ctk.CTkLabel(master=frame, 
                                     text=lbl_txt, 
                                     font=("Helvatica", 18),
-                                    text_color="white")
+                                    text_color="white", )
 
             def btn_del_ex_callback():
                 # delete load from total load dict from empty_frame
