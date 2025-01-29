@@ -2,6 +2,8 @@ import customtkinter as ctk
 from choice_frame import ChoiceFrame
 from data.sqlite import SQLHandler
 from muscle_frame import MuscleFrame
+from legend_frame import LegendFrame
+from muscle_left_frame import MuscleLeftFrame
 
 class EmptyFrame(ctk.CTkFrame):
     def __init__(self, parent):
@@ -25,9 +27,15 @@ class EmptyFrame(ctk.CTkFrame):
         self.total_load_per_muscle = dict()
 
     def create_widgets(self, parent):
+        # first row
         programming_side = ChoiceFrame(self)
-        programming_side.grid(column=0)
+        programming_side.grid(column=0, row=0, pady=20)
         programming_side.create_widgets(self)
+
+        muscle_lbl = ctk.CTkLabel(master=self, text_color="yellow", font=("Helvatica", 18), text="List of muscle to load:")
+        muscle_lbl.grid(column=1, row=0, pady=20)
+        muscle_lbl = ctk.CTkLabel(master=self, text_color="yellow", font=("Helvatica", 18), text="List of loaded muscles:")
+        muscle_lbl.grid(column=2, row=0, pady=20)
 
         trainig_program_frame = ctk.CTkFrame(self)
         trainig_program_frame.configure(fg_color="black")
@@ -44,8 +52,13 @@ class EmptyFrame(ctk.CTkFrame):
             day_lbl.grid(column=i, row=0)
             MyBtn(trainig_program_frame, i)  
 
+        muscle_left_frame = MuscleLeftFrame(self)
+        muscle_left_frame.grid(column=1, row=1)
+        muscle_left_frame.create_widgets()
         self.new_muscle_frame = MuscleFrame(self)
-        self.new_muscle_frame.grid(column=2, row=0, rowspan=5, sticky='NSEW')
+        self.new_muscle_frame.grid(column=2, row=1, sticky='NSEW')
+        legend_frame = LegendFrame(self)
+        legend_frame.grid(sticky="S", columnspan=3)
 
 class DelExSetFrame(ctk.CTkFrame):
     def __init__(self, parent, column):
