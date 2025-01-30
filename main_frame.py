@@ -65,8 +65,12 @@ class MainFrame(ctk.CTkFrame):
             instructions.pack(pady=30, padx=30, ipady=15, ipadx=15, fill="both")
 
         frecquency_selector = ctk.CTkComboBox(self, 
-                                              values=["1", "2", "3", "4", "5", "6" , "7"], 
-                                              command=combobox_callback)
+                                            values=["1", "2", "3", "4", "5", "6" , "7"], 
+                                            font=('Helvatica', 18), 
+                                            dropdown_font=('Helvatica', 18), 
+                                            dropdown_hover_color="gray60", 
+                                            justify="center",
+                                            command=combobox_callback)
 
         # place widgets
         grittings.pack(pady=50)
