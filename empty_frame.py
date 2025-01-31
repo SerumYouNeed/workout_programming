@@ -27,20 +27,21 @@ class EmptyFrame(ctk.CTkFrame):
         self.total_load_per_muscle = dict()
 
     def create_widgets(self, parent):
-        # first row
+        # zero row
         programming_side = ChoiceFrame(self)
         programming_side.grid(column=0, row=0, pady=20)
         programming_side.create_widgets(self)
 
-        muscle_lbl = ctk.CTkLabel(master=self, text_color="yellow", font=("Helvatica", 18), text="List of muscle to load:")
-        muscle_lbl.grid(column=1, row=0, pady=20)
-        muscle_lbl = ctk.CTkLabel(master=self, text_color="yellow", font=("Helvatica", 18), text="List of loaded muscles:")
-        muscle_lbl.grid(column=2, row=0, pady=20)
+        muscle_lbl = ctk.CTkLabel(master=self, text_color="yellow", font=("Helvatica", 18), text="List of muscle to load:", bg_color="pink")
+        muscle_lbl.grid(column=1, row=0, pady=20, sticky="NSEW")
+        muscle_lbl = ctk.CTkLabel(master=self, text_color="yellow", font=("Helvatica", 18), text="List of loaded muscles:", bg_color="pink")
+        muscle_lbl.grid(column=2, row=0, pady=20, sticky="NSEW")
 
+        # first row
         trainig_program_frame = ctk.CTkFrame(self)
         trainig_program_frame.configure(fg_color="black")
         trainig_program_frame["columns"] = list(range(0, parent.number_of_training_days * 2))
-        trainig_program_frame.grid()
+        trainig_program_frame.grid(column=0, row=1, sticky="NSEW")
         for i in range(parent.number_of_training_days):
             day_name = f"Day {i+1}"
             self.daily_routines[day_name] = list()
@@ -49,16 +50,19 @@ class EmptyFrame(ctk.CTkFrame):
                                    font=("Helvatica", 22),
                                    text_color="white")
             # set label and button on every other column
-            day_lbl.grid(column=i, row=0)
+            day_lbl.grid(column=i, row=0, pady=15)
             MyBtn(trainig_program_frame, i)  
 
         muscle_left_frame = MuscleLeftFrame(self)
-        muscle_left_frame.grid(column=1, row=1)
+        muscle_left_frame.grid(column=1, row=1, sticky="NSEW")
         muscle_left_frame.create_widgets()
         self.new_muscle_frame = MuscleFrame(self)
         self.new_muscle_frame.grid(column=2, row=1, sticky='NSEW')
+
+        # second row
         legend_frame = LegendFrame(self)
-        legend_frame.grid(sticky="S", columnspan=3)
+        legend_frame.grid(column=1, row=2, sticky="NSEW", pady=100)
+        legend_frame.create_widgets()
 
 class DelExSetFrame(ctk.CTkFrame):
     def __init__(self, parent, column):
