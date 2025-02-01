@@ -9,7 +9,7 @@ class EmptyFrame(ctk.CTkFrame):
     def __init__(self, parent):
         super().__init__(parent) 
         self.configure(fg_color="black")
-        self.grid_columnconfigure((0,1,2), weight=1)
+        self.grid_columnconfigure(0, weight=2)
 
         self.sql_handler = SQLHandler()
         self.muscle_multiplier = {}
@@ -61,8 +61,34 @@ class EmptyFrame(ctk.CTkFrame):
 
         # second row
         legend_frame = LegendFrame(self)
-        legend_frame.grid(column=1, row=2, sticky="NSEW", pady=100)
+        legend_frame.grid(column=1, row=2, columnspan=2, sticky="NSEW", pady=100)
         legend_frame.create_widgets()
+
+        # third row
+        def back():
+            parent.switch_frame(MainFrame)
+
+        back_btn = ctk.CTkButton(self, 
+                                text="Back", 
+                                width=100, 
+                                height=22, 
+                                font=("Helvatica", 15),
+                                text_color="white",
+                                fg_color="gray15",
+                                corner_radius=8,
+                                hover_color="gray18",
+                                command=back)
+        back_btn.grid(column=0, row=3)
+        save_btn = ctk.CTkButton(self, 
+                                width=100, 
+                                height=22, 
+                                font=("Helvatica", 15),
+                                text_color="white",
+                                fg_color="gray15",
+                                corner_radius=8,
+                                hover_color="gray18"
+                                )
+        save_btn.grid(column=1, row=3, columnspan=2)
 
 class DelExSetFrame(ctk.CTkFrame):
     def __init__(self, parent, column):

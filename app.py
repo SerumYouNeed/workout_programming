@@ -14,7 +14,6 @@ class App(ctk.CTk):
         self._frame = None
         self.resizable(width=True, height=True)
         self.number_of_training_days = None
-
         self.sql_handler = SQLHandler()
 
         self.switch_frame(MainFrame)
@@ -27,5 +26,6 @@ class App(ctk.CTk):
         if self._frame is not None:
             self._frame.destroy()
         self._frame = new_frame
-        self._frame.pack(fill="both", expand=True)
+        # self._frame.pack(fill="both", expand=True)
+        self._frame.grid()
         self._frame.create_widgets(self)

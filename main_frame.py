@@ -32,9 +32,9 @@ class MainFrame(ctk.CTkFrame):
                                  fg_color="black",
                                  text_color="white",
                                  font=("Helvatica", 22))
+        
         def nextBtn_callback():
             parent.number_of_training_days = int(frecquency_selector.get())
-            # self.sql_handler.create_exercise_set_table(parent.number_of_training_days)
             parent.switch_frame(EmptyFrame)
                     
         next_btn = ctk.CTkButton(self,
