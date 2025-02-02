@@ -5,7 +5,7 @@ from data.sqlite import SQLHandler
 class MuscleLeftFrame(ctk.CTkFrame):
     def __init__(self, parent):
         super().__init__(parent)  
-        self.configure(fg_color="green")
+        self.configure(fg_color="black")
         self.grid_columnconfigure((0,1,2), weight=1)
 
         self.sql_handler = SQLHandler()

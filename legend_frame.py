@@ -5,7 +5,7 @@ class LegendFrame(ctk.CTkFrame):
         super().__init__(parent)  
         self.grid_columnconfigure((0), weight=1)
         self.grid_rowconfigure((0,1,2,3), weight=1)
-        self.configure(fg_color="red")
+        self.configure(fg_color="black")
 
         self.legend_white = ctk.CTkLabel(master=self, text_color="white", font=("Helvatica", 18), text="White color means that you have room for few more sets.")
         self.legend_green = ctk.CTkLabel(master=self, text_color="green", font=("Helvatica", 18), text="Between 5 - 15 sets. This is where you want to be.")

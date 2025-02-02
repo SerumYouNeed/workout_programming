@@ -3,7 +3,7 @@ import customtkinter as ctk
 class MuscleFrame(ctk.CTkFrame):
     def __init__(self, parent):
         super().__init__(parent)  
-        self.configure(fg_color="white")
+        self.configure(fg_color="black")
         self.grid_columnconfigure((0,1,2), weight=1)
         self.entry = []
 
