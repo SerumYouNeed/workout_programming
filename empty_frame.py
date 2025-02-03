@@ -66,7 +66,7 @@ class EmptyFrame(ctk.CTkFrame):
 
         # third row
         def back():
-            parent.switch_frame(MainFrame)
+            parent.switch_frame(parent._main_frame)
 
         back_btn = ctk.CTkButton(self, 
                                 text="Back", 
