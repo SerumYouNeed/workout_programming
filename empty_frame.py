@@ -101,6 +101,8 @@ class MyBtn(ctk.CTkButton):
         super().__init__(master)
         self.row = 2
         self.sql_handler = SQLHandler()
+        dict_key = f"Day {int(column + 1)}"
+        entry_of_this_btn = {master.master.exercise:master.master.sets}
 
         def btn_add_ex_callback():
             multiplier_muscle_list =  self.sql_handler.read_multiplier_muscle(master.master.exercise)
@@ -112,7 +114,6 @@ class MyBtn(ctk.CTkButton):
             lbl_txt = f"{master.master.exercise} - {master.master.sets} {sets}"
             
             # add exercise: sets to master.master.daily_routines dict
-            dict_key = f"Day {int(column + 1)}"
             master.master.daily_routines[dict_key].append({master.master.exercise:master.master.sets})
             
             ex_label = ctk.CTkLabel(master=frame, 
@@ -128,6 +129,9 @@ class MyBtn(ctk.CTkButton):
                     master.master.total_load_per_muscle[muscle] -= total_load
                     if master.master.total_load_per_muscle[muscle] == 0:
                         del master.master.total_load_per_muscle[muscle]
+
+                master.master.daily_routines[dict_key].remove(entry_of_this_btn)
+                print(master.master.daily_routines)
 
                 ex_label.destroy()
                 delete_btn.destroy()
