@@ -90,11 +90,14 @@ class EmptyFrame(ctk.CTkFrame):
                                 )
         save_btn.grid(column=1, row=3, columnspan=2)
 
+# frame grouping delete button and exercise - sets label in one place. It remember exercise and sets on it.
 class DelExSetFrame(ctk.CTkFrame):
     def __init__(self, parent, column):
         super().__init__(parent)  
         self.configure(fg_color="black")
-        self.grid_columnconfigure(2)    
+        self.grid_columnconfigure(2)  
+        # self.ex_on_this_frame = parent.parent.exercise
+        # self.sets_on_this_frame = parent.parent.sets
 
 class MyBtn(ctk.CTkButton):
     def __init__(self, master, column):
@@ -107,6 +110,9 @@ class MyBtn(ctk.CTkButton):
         def btn_add_ex_callback():
             multiplier_muscle_list =  self.sql_handler.read_multiplier_muscle(master.master.exercise)
             frame = DelExSetFrame(master, column)
+            print(f'frame.master:{frame.master}')
+            # frame.ex_on_this_frame = master.master.exercise
+            # frame.sets_on_this_frame = master.master.sets
             # self: button, master: training_program_frame, master.master: empty_frame
             sets = "sets"
             if master.master.sets == 1:
@@ -130,8 +136,8 @@ class MyBtn(ctk.CTkButton):
                     if master.master.total_load_per_muscle[muscle] == 0:
                         del master.master.total_load_per_muscle[muscle]
 
-                master.master.daily_routines[dict_key].remove(entry_of_this_btn)
-                print(master.master.daily_routines)
+                # master.master.daily_routines[dict_key].remove({master.ex.on_this_frame:master.sets_on_this_frame})
+                print(f'master:{master}')
 
                 ex_label.destroy()
                 delete_btn.destroy()
