@@ -32,9 +32,9 @@ class EmptyFrame(ctk.CTkFrame):
         programming_side.grid(column=0, row=0, pady=20)
         programming_side.create_widgets(self)
 
-        muscle_lbl = ctk.CTkLabel(master=self, text_color="yellow", font=("Helvatica", 18), text="List of muscle to load:", bg_color="pink")
+        muscle_lbl = ctk.CTkLabel(master=self, text_color="yellow", font=("Helvatica", 18), text="List of muscle to load:", bg_color="black")
         muscle_lbl.grid(column=1, row=0, pady=20, sticky="NSEW")
-        muscle_lbl = ctk.CTkLabel(master=self, text_color="yellow", font=("Helvatica", 18), text="List of loaded muscles:", bg_color="pink")
+        muscle_lbl = ctk.CTkLabel(master=self, text_color="yellow", font=("Helvatica", 18), text="List of loaded muscles:", bg_color="black")
         muscle_lbl.grid(column=2, row=0, pady=20, sticky="NSEW")
 
         # first row
@@ -92,12 +92,12 @@ class EmptyFrame(ctk.CTkFrame):
 
 # frame grouping delete button and exercise - sets label in one place. It remember exercise and sets on it.
 class DelExSetFrame(ctk.CTkFrame):
-    def __init__(self, parent, column):
-        super().__init__(parent)  
+    def __init__(self, master, column):
+        super().__init__(master)  
         self.configure(fg_color="black")
         self.grid_columnconfigure(2)  
-        # self.ex_on_this_frame = parent.parent.exercise
-        # self.sets_on_this_frame = parent.parent.sets
+        self.ex_on_this_frame = master.master.exercise
+        self.sets_on_this_frame = master.master.sets
 
 class MyBtn(ctk.CTkButton):
     def __init__(self, master, column):
@@ -105,12 +105,11 @@ class MyBtn(ctk.CTkButton):
         self.row = 2
         self.sql_handler = SQLHandler()
         dict_key = f"Day {int(column + 1)}"
-        entry_of_this_btn = {master.master.exercise:master.master.sets}
+        self.entry_of_this_btn = dict()
 
         def btn_add_ex_callback():
             multiplier_muscle_list =  self.sql_handler.read_multiplier_muscle(master.master.exercise)
             frame = DelExSetFrame(master, column)
-            print(f'frame.master:{frame.master}')
             # frame.ex_on_this_frame = master.master.exercise
             # frame.sets_on_this_frame = master.master.sets
             # self: button, master: training_program_frame, master.master: empty_frame
@@ -122,10 +121,13 @@ class MyBtn(ctk.CTkButton):
             # add exercise: sets to master.master.daily_routines dict
             master.master.daily_routines[dict_key].append({master.master.exercise:master.master.sets})
             
+            self.entry_of_this_btn = {master.master.exercise:master.master.sets}
+
             ex_label = ctk.CTkLabel(master=frame, 
                                     text=lbl_txt, 
                                     font=("Helvatica", 18),
                                     text_color="white", )
+            # print(f'entry_of_this_btn:{self.entry_of_this_btn}')
 
             def btn_del_ex_callback():
                 # delete load from total load dict from empty_frame
@@ -136,13 +138,13 @@ class MyBtn(ctk.CTkButton):
                     if master.master.total_load_per_muscle[muscle] == 0:
                         del master.master.total_load_per_muscle[muscle]
 
-                # master.master.daily_routines[dict_key].remove({master.ex.on_this_frame:master.sets_on_this_frame})
-                print(f'master:{master}')
+                master.master.daily_routines[dict_key].remove({master.ex_on_this_frame:master.sets_on_this_frame})
 
                 ex_label.destroy()
                 delete_btn.destroy()
                 frame.destroy()
                 print(master.master.total_load_per_muscle)
+                print(master.master.daily_routines) 
 
             delete_btn = ctk.CTkButton(master=frame, text="X", width=15, height=15, text_color="black", fg_color="tomato", hover_color="red", command=btn_del_ex_callback)
             ex_label.grid(column=1, row=0, padx=5, pady=3) 
