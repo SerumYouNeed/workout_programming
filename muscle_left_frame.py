@@ -10,8 +10,12 @@ class MuscleLeftFrame(ctk.CTkFrame):
 
         self.sql_handler = SQLHandler()
         self.muscles = self.sql_handler.read_all_muscles()
+        self.muscle_labels = []
 
     def create_widgets(self):
         for i in self.muscles:
             muscle = ctk.CTkLabel(master=self, text_color="yellow", font=("Helvatica", 18), text=i)
             muscle.grid(column=1, sticky="NSEW")
+
+    def update_muscle_left_frame(self):
+        if 

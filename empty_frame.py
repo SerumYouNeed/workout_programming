@@ -110,8 +110,8 @@ class MyBtn(ctk.CTkButton):
         def btn_add_ex_callback():
             multiplier_muscle_list =  self.sql_handler.read_multiplier_muscle(master.master.exercise)
             frame = DelExSetFrame(master, column)
-            # frame.ex_on_this_frame = master.master.exercise
-            # frame.sets_on_this_frame = master.master.sets
+            frame.ex_on_this_frame = master.master.exercise
+            frame.sets_on_this_frame = master.master.sets
             # self: button, master: training_program_frame, master.master: empty_frame
             sets = "sets"
             if master.master.sets == 1:
@@ -127,7 +127,7 @@ class MyBtn(ctk.CTkButton):
                                     text=lbl_txt, 
                                     font=("Helvatica", 18),
                                     text_color="white", )
-            # print(f'entry_of_this_btn:{self.entry_of_this_btn}')
+            print(f'total load per muscle:{master.master.total_load_per_muscle}')
 
             def btn_del_ex_callback():
                 # delete load from total load dict from empty_frame
@@ -138,13 +138,16 @@ class MyBtn(ctk.CTkButton):
                     if master.master.total_load_per_muscle[muscle] == 0:
                         del master.master.total_load_per_muscle[muscle]
 
-                master.master.daily_routines[dict_key].remove({master.ex_on_this_frame:master.sets_on_this_frame})
+                master.master.daily_routines[dict_key].remove({frame.ex_on_this_frame:frame.sets_on_this_frame})
 
                 ex_label.destroy()
                 delete_btn.destroy()
                 frame.destroy()
                 print(master.master.total_load_per_muscle)
                 print(master.master.daily_routines) 
+                
+                # update right side with total load
+                master.master.new_muscle_frame.update_table_total_load(master.master)
 
             delete_btn = ctk.CTkButton(master=frame, text="X", width=15, height=15, text_color="black", fg_color="tomato", hover_color="red", command=btn_del_ex_callback)
             ex_label.grid(column=1, row=0, padx=5, pady=3) 
@@ -152,7 +155,6 @@ class MyBtn(ctk.CTkButton):
             frame.grid(column=column, row=self.row)
 
             self.row += 1
-            print(master.master.daily_routines)
 
             # calculate load for total dict in empty_frame
             for i in multiplier_muscle_list:
@@ -162,10 +164,11 @@ class MyBtn(ctk.CTkButton):
                     master.master.total_load_per_muscle[muscle] += total_load
                 else:
                     master.master.total_load_per_muscle[muscle] = total_load
-            print(master.master.total_load_per_muscle)
-            
+        
             # update right side with total load
             master.master.new_muscle_frame.update_table_total_load(master.master)
+            print(master.master.total_load_per_muscle)
+            print(master.master.daily_routines)
 
         btn = ctk.CTkButton(master=master, 
                             text="Add exercise", 
