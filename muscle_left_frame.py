@@ -18,5 +18,5 @@ class MuscleLeftFrame(ctk.CTkFrame):
             muscle.grid(column=1, sticky="NSEW")
 
     def update_muscle_left_frame(self, muscle):
-        if muscle in self.muscle_label:
-            del label
+        if muscle in self.muscles:
+            self.muscles.remove(muscle)
