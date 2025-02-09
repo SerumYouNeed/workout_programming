@@ -53,9 +53,9 @@ class EmptyFrame(ctk.CTkFrame):
             day_lbl.grid(column=i, row=0, pady=15)
             MyBtn(trainig_program_frame, i)  
 
-        muscle_left_frame = MuscleLeftFrame(self)
-        muscle_left_frame.grid(column=1, row=1, sticky="NSEW")
-        muscle_left_frame.create_widgets()
+        self.muscle_left_frame = MuscleLeftFrame(self)
+        self.muscle_left_frame.grid(column=1, row=1, sticky="NSEW")
+        self.muscle_left_frame.create_widgets()
         self.new_muscle_frame = MuscleFrame(self)
         self.new_muscle_frame.grid(column=2, row=1, sticky='NSEW')
 
@@ -167,6 +167,11 @@ class MyBtn(ctk.CTkButton):
         
             # update right side with total load
             master.master.new_muscle_frame.update_table_total_load(master.master)
+
+            # update left side
+            for k in master.master.total_load_per_muscle.keys():
+                master.master.muscle_left_frame.update_muscle_left_frame(k)
+                
             print(master.master.total_load_per_muscle)
             print(master.master.daily_routines)
 

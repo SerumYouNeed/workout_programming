@@ -16,7 +16,11 @@ class MuscleLeftFrame(ctk.CTkFrame):
         for i in self.muscles:
             muscle = ctk.CTkLabel(master=self, text_color="yellow", font=("Helvatica", 18), text=i)
             muscle.grid(column=1, sticky="NSEW")
+            self.muscle_labels.append(muscle)
 
     def update_muscle_left_frame(self, muscle):
-        if muscle in self.muscles:
-            self.muscles.remove(muscle)
+        for i in self.muscle_labels:
+            if i.cget('text') == muscle:
+                i.destroy()
+            if i in self.muscles:
+                self.muscles.remove(muscle)
