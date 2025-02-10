@@ -28,5 +28,10 @@ class MuscleLeftFrame(ctk.CTkFrame):
                 self.muscles.remove(muscle)
 
     def update_after_deletion(self):
-        for i in self.muscles:
-            if i 
+        for lbl in self.muscle_labels:
+            lbl.destroy()
+        for i in self.removed_muscle_after_update:
+            if i not in self.muscles:
+                self.muscles.append(i)
+        self.muscles.sort()
+        self.create_widgets()
