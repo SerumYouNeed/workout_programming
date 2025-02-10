@@ -149,6 +149,9 @@ class MyBtn(ctk.CTkButton):
                 # update right side with total load
                 master.master.new_muscle_frame.update_table_total_load(master.master)
 
+                # update left side
+                master.master.muscle_left_frame.update_after_deletion()
+
             delete_btn = ctk.CTkButton(master=frame, text="X", width=15, height=15, text_color="black", fg_color="tomato", hover_color="red", command=btn_del_ex_callback)
             ex_label.grid(column=1, row=0, padx=5, pady=3) 
             delete_btn.grid(column=0, row=0, padx=5, pady=3)
@@ -171,7 +174,7 @@ class MyBtn(ctk.CTkButton):
             # update left side
             for k in master.master.total_load_per_muscle.keys():
                 master.master.muscle_left_frame.update_muscle_left_frame(k)
-                
+
             print(master.master.total_load_per_muscle)
             print(master.master.daily_routines)
 

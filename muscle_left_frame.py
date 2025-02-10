@@ -11,6 +11,7 @@ class MuscleLeftFrame(ctk.CTkFrame):
         self.sql_handler = SQLHandler()
         self.muscles = self.sql_handler.read_all_muscles()
         self.muscle_labels = []
+        self.removed_muscle_after_update = []
 
     def create_widgets(self):
         for i in self.muscles:
@@ -23,4 +24,9 @@ class MuscleLeftFrame(ctk.CTkFrame):
             if i.cget('text') == muscle:
                 i.destroy()
             if i in self.muscles:
+                self.removed_muscle_after_update.append(i)
                 self.muscles.remove(muscle)
+
+    def update_after_deletion(self):
+        for i in self.muscles:
+            if i 
