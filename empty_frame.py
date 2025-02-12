@@ -4,6 +4,7 @@ from data.sqlite import SQLHandler
 from muscle_frame import MuscleFrame
 from legend_frame import LegendFrame
 from muscle_left_frame import MuscleLeftFrame
+from save_btn import SaveButton
 
 class EmptyFrame(ctk.CTkFrame):
     def __init__(self, parent):
@@ -44,7 +45,7 @@ class EmptyFrame(ctk.CTkFrame):
         trainig_program_frame.grid(column=0, row=1, sticky="NSEW")
         for i in range(parent.number_of_training_days):
             day_name = f"Day {i+1}"
-            self.daily_routines[day_name] = list()
+            self.daily_routines[day_name] = dict()
             day_lbl = ctk.CTkLabel(master=trainig_program_frame, 
                                    text="Day " + str(i + 1), 
                                    font=("Helvatica", 22),
@@ -79,16 +80,7 @@ class EmptyFrame(ctk.CTkFrame):
                                 hover_color="gray18",
                                 command=back)
         back_btn.grid(column=0, row=3)
-        save_btn = ctk.CTkButton(self, 
-                                width=100, 
-                                height=22, 
-                                font=("Helvatica", 15),
-                                text_color="white",
-                                fg_color="gray15",
-                                corner_radius=8,
-                                hover_color="gray18"
-                                )
-        save_btn.grid(column=1, row=3, columnspan=2)
+        SaveButton(self)
 
 # frame grouping delete button and exercise - sets label in one place. It remember exercise and sets on it.
 class DelExSetFrame(ctk.CTkFrame):
@@ -119,7 +111,7 @@ class MyBtn(ctk.CTkButton):
             lbl_txt = f"{master.master.exercise} - {master.master.sets} {sets}"
             
             # add exercise: sets to master.master.daily_routines dict
-            master.master.daily_routines[dict_key].append({master.master.exercise:master.master.sets})
+            master.master.daily_routines[dict_key].update({master.master.exercise:master.master.sets})
             
             self.entry_of_this_btn = {master.master.exercise:master.master.sets}
 
@@ -138,7 +130,7 @@ class MyBtn(ctk.CTkButton):
                     if master.master.total_load_per_muscle[muscle] == 0:
                         del master.master.total_load_per_muscle[muscle]
 
-                master.master.daily_routines[dict_key].remove({frame.ex_on_this_frame:frame.sets_on_this_frame})
+                del master.master.daily_routines[dict_key][frame.ex_on_this_frame]
 
                 ex_label.destroy()
                 delete_btn.destroy()
