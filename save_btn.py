@@ -10,17 +10,14 @@ class SaveButton(ctk.CTkButton):
 
             with open('workout_plan.csv', mode='w') as csv_file:
                 fieldnames = ['day', 'exercise', 'sets']
+                
                 writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
                 writer.writeheader()
 
                 for i in self.plan.keys():
                     writer.writerow({'day':i})
-                    # for i in self.plan[k]:
-                    for j in self.plan.values():
-                        for k in j:
-                            print(k)
-                            # for x, y in k:
-                            #     writer.writerow({'exercise': x, 'sets': y})
+                    for k, v in self.plan[i].items():
+                        writer.writerow({'exercise': k, 'sets': v})
 
         btn = ctk.CTkButton(master=master, 
                             text="Save",
