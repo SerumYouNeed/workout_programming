@@ -1,4 +1,5 @@
 import customtkinter as ctk
+from reportlab.pdfgen import canvas
 import csv
 
 class SaveButton(ctk.CTkButton):
@@ -18,6 +19,15 @@ class SaveButton(ctk.CTkButton):
                     writer.writerow({'day':i})
                     for k, v in self.plan[i].items():
                         writer.writerow({'exercise': k, 'sets': v})
+
+        def create_pdf():
+            # A4 pagesize
+            c = canvas.Canvas("workout_plan.pdf", pagesize=(595.27, 841.89)) 
+            c.drawString(50, 780, "Hello Again")
+            # finnish page
+            c.showPage()
+            # save to pdf
+            c.save()
 
         btn = ctk.CTkButton(master=master, 
                             text="Save",
