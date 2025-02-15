@@ -38,5 +38,5 @@ class SaveButton(ctk.CTkButton):
                             fg_color="gray15",
                             corner_radius=8,
                             hover_color="gray18",
-                            command=create_csv_plan)
+                            command=create_pdf)
         btn.grid(row=3, column=1, columnspan=2)
