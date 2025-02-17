@@ -6,6 +6,8 @@ class SaveButton(ctk.CTkButton):
     def __init__(self, master):
         super().__init__(master)
         self.plan = master.daily_routines
+        self.start_point_x = 50
+        self.start_point_y = 780
 
         # Nonactive function. Create csv version of a plan.
         def create_csv_plan():
@@ -22,9 +24,13 @@ class SaveButton(ctk.CTkButton):
             # A4 pagesize
             c = canvas.Canvas("workout_plan.pdf", pagesize=(595.27, 841.89)) 
             for i in self.plan.keys():
-                c.drawString(50, 780, i)    
+                self.start_point_y -= 20     
+                c.setFont('Helvetica-Bold', 25, leading = None)
+                c.drawString(self.start_point_x, self.start_point_y, i)
                 for k, v in self.plan[i].items():
-                    c.drawString(50, 780, f'{k}: {v}')
+                    c.setFont('Helvetica', 18, leading = None)
+                    self.start_point_y -= 20     
+                    c.drawString(self.start_point_x, self.start_point_y, f'{k}: {v}')
             # finnish page
             c.showPage()
             # save to pdf
