@@ -22,15 +22,26 @@ class SaveButton(ctk.CTkButton):
 
         def create_pdf():
             # A4 pagesize
-            c = canvas.Canvas("workout_plan.pdf", pagesize=(595.27, 841.89)) 
+            c = canvas.Canvas("workout_plan.pdf", pagesize=(595.27, 841.89))
+            c.setFont('Helvetica-Bold', 25, leading = None)
+            c.drawString(self.start_point_x, self.start_point_y, 'Personal workout:')
+            self.start_point_y -= 5
+            c.line(self.start_point_x, self.start_point_y, self.start_point_x + 250, self.start_point_y)     
+            self.start_point_y -= 50
             for i in self.plan.keys():
-                self.start_point_y -= 20     
+                ex_nr = 1
                 c.setFont('Helvetica-Bold', 25, leading = None)
                 c.drawString(self.start_point_x, self.start_point_y, i)
+                self.start_point_y -= 40     
                 for k, v in self.plan[i].items():
                     c.setFont('Helvetica', 18, leading = None)
-                    self.start_point_y -= 20     
-                    c.drawString(self.start_point_x, self.start_point_y, f'{k}: {v}')
+                    if v == 1:
+                        c.drawString(self.start_point_x, self.start_point_y, f'{ex_nr}. {k} - {v} set')
+                    else:
+                        c.drawString(self.start_point_x, self.start_point_y, f'{ex_nr}. {k} - {v} sets')
+                    ex_nr += 1
+                    self.start_point_y -= 30     
+            self.start_point_y -= 40     
             # finnish page
             c.showPage()
             # save to pdf
