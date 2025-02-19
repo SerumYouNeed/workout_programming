@@ -16,9 +16,9 @@ class SaveButton(ctk.CTkButton):
                 writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
                 writer.writeheader()
                 for i in self.plan.keys():
-                    writer.writerow({'day':i})
                     for k, v in self.plan[i].items():
-                        writer.writerow({'exercise': k, 'sets': v})
+                        writer.writerow({'day':i})
+                        writer.writerow('day' i'exercise': k, 'sets': v})
 
         def create_pdf():
             # A4 pagesize
