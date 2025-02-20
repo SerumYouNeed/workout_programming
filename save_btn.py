@@ -9,7 +9,6 @@ class SaveButton(ctk.CTkButton):
         self.start_point_x = 50
         self.start_point_y = 780
 
-        # Nonactive function. Create csv version of a plan.
         def create_csv_plan():
             with open('workout_plan.csv', mode='w') as csv_file:
                 fieldnames = ['day', 'exercise', 'sets']    
@@ -17,8 +16,7 @@ class SaveButton(ctk.CTkButton):
                 writer.writeheader()
                 for i in self.plan.keys():
                     for k, v in self.plan[i].items():
-                        writer.writerow({'day':i})
-                        writer.writerow('day' i'exercise': k, 'sets': v})
+                        writer.writerow({'day': i, 'exercise': k, 'sets': v})
 
         def create_pdf():
             # A4 pagesize
@@ -47,6 +45,11 @@ class SaveButton(ctk.CTkButton):
             # save to pdf
             c.save()
 
+        def callback_btn():
+            create_csv_plan()
+            create_pdf()
+            
+
         btn = ctk.CTkButton(master=master, 
                             text="Save",
                             width=100,
@@ -56,5 +59,5 @@ class SaveButton(ctk.CTkButton):
                             fg_color="gray15",
                             corner_radius=8,
                             hover_color="gray18",
-                            command=create_pdf)
+                            command=callback_btn)
         btn.grid(row=3, column=1, columnspan=2)
