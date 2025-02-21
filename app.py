@@ -20,6 +20,8 @@ class App(ctk.CTk):
 
         self.mainloop()
 
+        ctk.set_appearance_mode("dark")
+
     def switch_frame(self, frame_class):
         new_frame = frame_class(self)
         if self._frame is not None:

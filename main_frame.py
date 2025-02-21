@@ -39,11 +39,7 @@ class MainFrame(ctk.CTkFrame):
                     
         next_btn = ctk.CTkButton(self,
                                  text="Next",
-                                 font=("Helvatica", 15),
-                                 text_color="white",
-                                 fg_color="gray15",
-                                 corner_radius=8,
-                                 hover_color="gray18",
+                                 font=('', 15),
                                  command=nextBtn_callback) 
                
         def combobox_callback(choice):

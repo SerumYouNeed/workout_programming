@@ -1,4 +1,5 @@
 import customtkinter as ctk
+from CTkMessagebox import CTkMessagebox
 from reportlab.pdfgen import canvas
 import csv
 
@@ -9,8 +10,9 @@ class SaveButton(ctk.CTkButton):
         self.start_point_x = 50
         self.start_point_y = 780
 
-        def create_csv_plan():
-            with open('workout_plan.csv', mode='w') as csv_file:
+        def create_csv_plan(file_name):
+            filename = f'{file_name}.csv'
+            with open(filename, mode='w') as csv_file:
                 fieldnames = ['day', 'exercise', 'sets']    
                 writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
                 writer.writeheader()
@@ -18,9 +20,10 @@ class SaveButton(ctk.CTkButton):
                     for k, v in self.plan[i].items():
                         writer.writerow({'day': i, 'exercise': k, 'sets': v})
 
-        def create_pdf():
+        def create_pdf(file_name):
+            filename = f'{file_name}.pdf'
             # A4 pagesize
-            c = canvas.Canvas("workout_plan.pdf", pagesize=(595.27, 841.89))
+            c = canvas.Canvas(filename, pagesize=(595.27, 841.89))
             c.setFont('Helvetica-Bold', 25, leading = None)
             c.drawString(self.start_point_x, self.start_point_y, 'Personal workout:')
             self.start_point_y -= 5
@@ -45,10 +48,28 @@ class SaveButton(ctk.CTkButton):
             # save to pdf
             c.save()
 
+        def type_file_name():
+            dialog = ctk.CTkInputDialog(text="Enter a <name>. Program will create two files for you: \n<name>.pdf\n<name>.csv\nYou can find them in the location of the program.", title="Name your file")
+            return dialog.get_input()
+                                       
+        def show_checkmark():
+            CTkMessagebox(title="Great!",
+                          title_color="white",
+                          message="Your workout was successfully saved.",
+                          icon="check",
+                          option_1="Thanks",
+                          fg_color='gray18',
+                          bg_color="black",
+                          text_color="white",
+                          justify="center",
+                          corner_radius=15,
+                          )
+
         def callback_btn():
-            create_csv_plan()
-            create_pdf()
-            
+            file_name = type_file_name()
+            create_csv_plan(file_name)
+            create_pdf(file_name)
+            show_checkmark()
 
         btn = ctk.CTkButton(master=master, 
                             text="Save",
