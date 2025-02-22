@@ -7,31 +7,22 @@ from data.sqlite import SQLHandler
 class MainFrame(ctk.CTkFrame):
     def __init__(self, parent):
         super().__init__(parent) 
-        self.configure(fg_color="black")
         self.grid(row=0, column=0, sticky="ewns")
         self.sql_handler = SQLHandler()
+
+        ctk.set_appearance_mode("dark")
 
 
     def create_widgets(self, parent):
         # create widgets
         grittings = ctk.CTkLabel(self, 
                                  text="Welcome in workout creator!",
-                                 fg_color="black",
-                                 text_color="white",
-                                 font=("Helvatica", 27))
+                                 font=("", 27))
         instructions = ctk.CTkLabel(self, 
-                                 text_color="white",
-                                 font=("Helvatica", 16),
-                                 bg_color="gray18",
-                                 corner_radius=8, 
-                                 width=500,
-                                 wraplength=500,
-                                 justify="left")
+                                 font=("", 16))
         frecquency_q = ctk.CTkLabel(self, 
                                  text="Training days:",
-                                 fg_color="black",
-                                 text_color="white",
-                                 font=("Helvatica", 22))
+                                 font=("", 22))
         
         def nextBtn_callback():
             parent.number_of_training_days = int(frecquency_selector.get())
