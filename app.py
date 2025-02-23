@@ -1,3 +1,4 @@
+# Root app class with basic switching frames function.
 import customtkinter as ctk
 from main_frame import MainFrame
 from data.sqlite import SQLHandler
@@ -20,13 +21,12 @@ class App(ctk.CTk):
 
         self.mainloop()
 
-        ctk.set_appearance_mode("dark")
+        ctk.set_appearance_mode('dark')
 
     def switch_frame(self, frame_class):
         new_frame = frame_class(self)
         if self._frame is not None:
             self._frame.destroy()
         self._frame = new_frame
-        # self._frame.pack(fill="both", expand=True)
-        self._frame.grid(sticky="NSEW")
+        self._frame.grid(sticky='NSEW')
         self._frame.create_widgets(self)

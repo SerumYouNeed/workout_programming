@@ -49,19 +49,19 @@ class SaveButton(ctk.CTkButton):
             c.save()
 
         def type_file_name():
-            dialog = ctk.CTkInputDialog(text="Enter a <name>. Program will create two files for you: \n<name>.pdf\n<name>.csv\nYou can find them in the location of the program.", title="Name your file")
+            dialog = ctk.CTkInputDialog(text='Enter a <name>. Program will create two files for you: \n<name>.pdf\n<name>.csv\nYou can find them in the location of the program.', title='Name your file')
             return dialog.get_input()
                                        
         def show_checkmark():
-            CTkMessagebox(title="Great!",
-                          title_color="white",
-                          message="Your workout was successfully saved.",
-                          icon="check",
-                          option_1="Thanks",
+            CTkMessagebox(title='Great!',
+                          title_color='white',
+                          message='Your workout was successfully saved.',
+                          icon='check',
+                          option_1='Thanks',
                           fg_color='gray18',
-                          bg_color="black",
-                          text_color="white",
-                          justify="center",
+                          bg_color='black',
+                          text_color='white',
+                          justify='center',
                           corner_radius=15,
                           )
 
@@ -72,13 +72,6 @@ class SaveButton(ctk.CTkButton):
             show_checkmark()
 
         btn = ctk.CTkButton(master=master, 
-                            text="Save",
-                            width=100,
-                            height=22,
-                            font=("Helvatica", 15),
-                            text_color="white",
-                            fg_color="gray15",
-                            corner_radius=8,
-                            hover_color="gray18",
+                            text='Save',
                             command=callback_btn)
         btn.grid(row=3, column=1, columnspan=2)
