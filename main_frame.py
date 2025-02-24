@@ -11,15 +11,14 @@ class MainFrame(ctk.CTkFrame):
         ctk.set_appearance_mode('dark')
 
     def create_widgets(self, parent):
-        # create widgets
         grittings = ctk.CTkLabel(self, 
-                                 text='Welcome in workout creator!',
-                                 font=('', 27))
+                                 text='Welcome in the workout creator!',
+                                 font=('', 27, 'bold'))
         instructions = ctk.CTkLabel(self, 
-                                 font=('', 16),
+                                 font=('', 18),
                                  wraplength=700)
         frecquency_q = ctk.CTkLabel(self, 
-                                 text='Training days:',
+                                 text='How many days are you going to train?',
                                  font=('', 22))
         
         def nextBtn_callback():
