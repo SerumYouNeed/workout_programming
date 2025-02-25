@@ -13,7 +13,7 @@ class MainFrame(ctk.CTkFrame):
     def create_widgets(self, parent):
         grittings = ctk.CTkLabel(self, 
                                  text='Welcome in the workout creator!',
-                                 font=('', 27, 'bold'))
+                                 font=('', 29, 'bold'))
         instructions = ctk.CTkLabel(self, 
                                  font=('', 18),
                                  wraplength=700)
@@ -33,17 +33,17 @@ class MainFrame(ctk.CTkFrame):
         def combobox_callback(choice):
             match choice:
                 case '1':
-                    instructions.configure(text='One day a week is usually not enough - but hey, it is still better that none.\nPick max 7 exercises from dropdown menu below. Number of exercises is not random.\nYou can pick less and adjust later.')
+                    instructions.configure(text='One day a week is usually not enough - but hey, it is still better than none. Try to train full body on each training sesion.')
                 case '2':
-                    instructions.configure(text='For two training days it is highly recomended to perform two full body training.\nIn this case each muscle will be trained two times per week.\nYou can stimulate muscles from diffrent angles - say, perform flat bench press on day one and incline on day two.')
+                    instructions.configure(text='For two training days it is highly recomended to perform two full body training. In this case each muscle will be trained two times per week. You can stimulate muscles from diffrent angles - say, perform flat bench press on day one and incline on day two.')
                 case '3':
-                    instructions.configure(text='Three days split can be aranged as 3 x FBW, or you can create two routines A/B - like upper/lower, push/pull, torso/limbs, front/rear - and train A/B/A in first week, then B/A/B in second.\nTraing will be a tad longer then in four days per week but much more versatile then one and two days per week.')
+                    instructions.configure(text='Three days split can be aranged as 3 x FBW, or you can create two routines A/B - like upper/lower, push/pull, torso/limbs, front/rear - and train A/B/A in first week, then B/A/B in second. Traing will be a tad longer then in four days per week but much more versatile then one and two days per week.')
                 case '4':
-                    instructions.configure(text='Four days split can be aranged as 4 x FBW, or you can create two routines A/B - like upper/lower, push/pull, torso/limbs, front/rear - and train A/B/A/B.\nTraining each muscle twice a week is a sweet spot. You can add some volume and not stuck in the gym for hours.')
+                    instructions.configure(text='Four days split can be aranged as 4 x FBW, or you can create two routines A/B - like upper/lower, push/pull, torso/limbs, front/rear - and train A/B/A/B.')
                 case '5':
-                    instructions.configure(text='Five days FBW split is hard to maintain, but if your recovery is ok you can try it.\nYou can create routines like upper/lower, push/pull, torso/limbs, front/rear, push/pull/legs.\nTraining each muscle more than twice a week can be really challenging.')
+                    instructions.configure(text='Five days FBW split is hard to maintain, but if your recovery is ok you can try it. Training each muscle more than twice a week can be really challenging.')
                 case '6':
-                    instructions.configure(text='Only if everything in your life is about GAINS.\nRemember, even pros do not workout everyday.\nIt is really, really hard to maintain that kind of routine. Anyway, you will spend so much time in the gym that you can perform nearly every kind of workout.')
+                    instructions.configure(text='Only if everything in your life is about GAINS. Remember, even pros do not workout everyday. It is really, really hard to maintain that kind of routine.')
                 case '7':
                     instructions.configure(text='Really...? Do you REALLY want to go to the gym every day? Give me a break.')
             instructions.pack(pady=30, padx=30, ipady=15, ipadx=15, fill='both')
@@ -52,6 +52,7 @@ class MainFrame(ctk.CTkFrame):
                                             values=['1','2','3','4','5','6','7'], 
                                             font=('', 18), 
                                             dropdown_font=('', 18),
+                                            width=70,
                                             command=combobox_callback)
 
         # place widgets

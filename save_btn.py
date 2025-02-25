@@ -54,16 +54,9 @@ class SaveButton(ctk.CTkButton):
                                        
         def show_checkmark():
             CTkMessagebox(title='Great!',
-                          title_color='white',
                           message='Your workout was successfully saved.',
                           icon='check',
-                          option_1='Thanks',
-                          fg_color='gray18',
-                          bg_color='black',
-                          text_color='white',
-                          justify='center',
-                          corner_radius=15,
-                          )
+                          option_1='Thanks')
 
         def callback_btn():
             file_name = type_file_name()
@@ -73,5 +66,6 @@ class SaveButton(ctk.CTkButton):
 
         btn = ctk.CTkButton(master=master, 
                             text='Save',
+                            font=('', 15),
                             command=callback_btn)
         btn.grid(row=3, column=1, columnspan=2)

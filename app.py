@@ -9,7 +9,6 @@ class App(ctk.CTk):
         self.title(title)
         self.geometry(f'{geometry[0]}x{geometry[1]}')
         self.minsize(geometry[0], geometry[1])
-        # This tells to use as much space as possible
         self.rowconfigure(0, weight=1)
         self.columnconfigure(0, weight=1)
         self._frame = None
