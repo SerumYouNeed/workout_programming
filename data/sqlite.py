@@ -16,11 +16,6 @@ class SQLHandler:
             pass
             # print(f'Error while reading sql script', error)
             
-        # finally:
-        #     if connection:
-        #         connection.close()
-        #         print('Connection is closed')
-
     def read_all_exercises(self):
         cursor = self.connection.cursor()     
         query = "SELECT DISTINCT exercise FROM exercises;"
