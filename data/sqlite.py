@@ -45,4 +45,8 @@ class SQLHandler:
         cursor.execute("SELECT multiplier, muscle FROM exercises WHERE exercise == ?", (exercise,) )
         tup = cursor.fetchall()
         return tup 
-   
+    
+    def new_exercise(self, muscle, exercise, weight):
+        cursor = self.connection.cursor()
+        cursor.execute("INSERT INTO exercises VALUES(NULL, ?, ?, ?)", (muscle, exercise, weight,))
+        self.connection.close()

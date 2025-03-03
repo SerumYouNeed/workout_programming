@@ -23,7 +23,9 @@ class ChoiceFrame(ctk.CTkFrame):
             parent.sets = int(set)
 
         def new_exercise():
-            pass
+            dialog = ctk.CTkInputDialog(text='Create a name of your exercise. It should not start with digit, space or non-letter sign', title='Name your exercise')
+            name = dialog.get_input()
+            dialog = ctk.CTkInputDialog(text='Name of your exercise should not start with digit, space or non-letter sign', title='Muscles trained')
 
         combo_ex = ctk.CTkComboBox(master=self,
                                     values=self.exercises_list,  
@@ -50,7 +52,7 @@ class ChoiceFrame(ctk.CTkFrame):
         combo_set_lbl.grid(column=0, row=1, padx=15, sticky='E')
 
         add_exercise_lbl = ctk.CTkLabel(self,
-                                        text='Add an exercise to the list:',
+                                        text='Add new exercise to the list:',
                                         font=('', 18, 'bold'))
         add_exercise_lbl.grid(column=0, row=2, padx=15, sticky='E')
         add_exercise_btn = ctk.CTkButton(self,
