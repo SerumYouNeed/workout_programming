@@ -29,10 +29,11 @@ class ChoiceFrame(ctk.CTkFrame):
             dialog_musc = ctk.CTkInputDialog(text=f'What muscle are you going to train with {name}. If more that one, add another exercise with the same name but different muscle and weight', title='Muscles trained')
             muscle = dialog_musc.get_input()
             dialog_weight = ctk.CTkInputDialog(text=f'Set weight of {name}. Choose number from 0 (indicate that this exercise has almost no impact for given muscle group) to 1 (indicate that chosen muscle is main mover during that exercise). If more that one, add another exercise with the same name but different muscle and weight', title='Muscle trained')
-            weight = dialog_weight.get_input()
+            weight = int(dialog_weight.get_input())
             try:
-                self.sql_handler.new_exercise(muscle, name, int(weight))
-                if name in self.sql_handler.read_all_exercises():
+                self.sql_handler.new_exercise(muscle, name, weight)
+                ex_list = self.sql_handler.read_all_exercises()
+                if name in ex_list:
                     CTkMessagebox(title='Great!',
                                   message='Your exercise was successfully added.',
                                   icon='check',
@@ -70,8 +71,8 @@ class ChoiceFrame(ctk.CTkFrame):
                                         text='Add new exercise to the list:',
                                         font=('', 18, 'bold'))
         add_exercise_lbl.grid(column=0, row=2, padx=15, sticky='E')
-        # add_exercise_btn = ctk.CTkButton(self,
-        #                                  text='New exercise',
-        #                                  font=('', 15),
-        #                                  command=new_exercise)
-        # add_exercise_btn.grid(column=1, row=2, padx=15, pady=10, sticky='W')
+        add_exercise_btn = ctk.CTkButton(self,
+                                         text='New exercise',
+                                         font=('', 15),
+                                         command=new_exercise)
+        add_exercise_btn.grid(column=1, row=2, padx=15, pady=10, sticky='W')

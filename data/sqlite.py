@@ -48,5 +48,11 @@ class SQLHandler:
     
     def new_exercise(self, muscle, exercise, weight):
         cursor = self.connection.cursor()
-        cursor.execute("INSERT INTO exercises VALUES(NULL, ?, ?, ?)", (muscle, exercise, weight,))
-        self.connection.close()
+        sqlite_insert_query = """INSERT INTO exercises
+                          (id, muscle, exercise, multiplier) 
+                           VALUES 
+                          (NULL, ?, ?, ?)"""
+        data_tuple = (muscle, exercise, weight)
+        cursor.execute(sqlite_insert_query, data_tuple)
+        self.connection.commit()
+        cursor.close()
