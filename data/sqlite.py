@@ -46,6 +46,17 @@ class SQLHandler:
         tup = cursor.fetchall()
         return tup 
     
+    def check_if_exists(self, muscle, exercise):
+        sqlite_check_query = """SELECT muscle, exercise
+                                FROM exercises 
+                                WHERE muscle == ? AND exercise == ?"""
+        data_tuple = (muscle, exercise)
+        cursor = self.connection.cursor()
+        cursor.execute(sqlite_check_query, data_tuple)
+        if_exist = cursor.fetchall()
+        cursor.close()
+        return if_exist
+    
     def new_exercise(self, muscle, exercise, weight):
         cursor = self.connection.cursor()
         sqlite_insert_query = """INSERT INTO exercises

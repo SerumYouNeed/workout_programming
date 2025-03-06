@@ -30,18 +30,23 @@ class ChoiceFrame(ctk.CTkFrame):
             muscle = dialog_musc.get_input()
             dialog_weight = ctk.CTkInputDialog(text=f'Set weight of {name}. Choose number from 0 (indicate that this exercise has almost no impact for given muscle group) to 1 (indicate that chosen muscle is main mover during that exercise). If more that one, add another exercise with the same name but different muscle and weight', title='Muscle trained')
             weight = int(dialog_weight.get_input())
-            try:
-                self.sql_handler.new_exercise(muscle, name, weight)
-                ex_list = self.sql_handler.read_all_exercises()
-                if name in ex_list:
-                    CTkMessagebox(title='Great!',
-                                  message='Your exercise was successfully added.',
-                                  icon='check',
-                                  option_1='Thanks')
-            except:
-                CTkMessagebox(title='Ups...',
-                              message='Something went wrong.',
-                              icon='cancel')
+            if self.sql_handler.check_if_exists(muscle, name) == []:
+                try:
+                    self.sql_handler.new_exercise(muscle, name, weight)
+                    ex_list = self.sql_handler.read_all_exercises()
+                    if name in ex_list:
+                        CTkMessagebox(title='Great!',
+                                    message='Your exercise was successfully added.',
+                                    icon='check',
+                                    option_1='Thanks')
+                except:
+                    CTkMessagebox(title='Ups...',
+                                message='Something went wrong.',
+                                icon='cancel')
+            else:
+                CTkMessagebox(title='Exercise status',
+                              message='It seems we already have your exercise on the list.',
+                              icon='warning')
 
         combo_ex = ctk.CTkComboBox(master=self,
                                     values=self.exercises_list,  
