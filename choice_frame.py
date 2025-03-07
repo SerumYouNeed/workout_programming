@@ -33,8 +33,8 @@ class ChoiceFrame(ctk.CTkFrame):
             if self.sql_handler.check_if_exists(muscle, name) == []:
                 try:
                     self.sql_handler.new_exercise(muscle, name, weight)
-                    ex_list = self.sql_handler.read_all_exercises()
-                    if name in ex_list:
+                    ex_added = self.sql_handler.check_add_correctly(muscle, name, weight)
+                    if [muscle, name, weight] == ex_added:
                         CTkMessagebox(title='Great!',
                                     message='Your exercise was successfully added.',
                                     icon='check',
@@ -45,7 +45,7 @@ class ChoiceFrame(ctk.CTkFrame):
                                 icon='cancel')
             else:
                 CTkMessagebox(title='Exercise status',
-                              message='It seems we already have your exercise on the list.',
+                              message='It seems your exercise is already on the list.',
                               icon='warning')
 
         combo_ex = ctk.CTkComboBox(master=self,

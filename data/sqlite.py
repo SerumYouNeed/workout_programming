@@ -67,3 +67,14 @@ class SQLHandler:
         cursor.execute(sqlite_insert_query, data_tuple)
         self.connection.commit()
         cursor.close()
+
+    def check_add_correctly(self, muscle, exercise, weight):
+        sqlite_check_query = """SELECT muscle, exercise, multiplier
+                                FROM exercises 
+                                WHERE muscle == ? AND exercise == ? AND multiplier == ?"""
+        data_tuple = (muscle, exercise, weight)
+        cursor = self.connection.cursor()
+        cursor.execute(sqlite_check_query, data_tuple)
+        if_exist = cursor.fetchall()
+        cursor.close()
+        return if_exist
