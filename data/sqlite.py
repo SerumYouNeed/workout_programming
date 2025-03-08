@@ -69,6 +69,15 @@ class SQLHandler:
         cursor.close()
 
     def check_add_correctly(self, muscle, exercise, weight):
+        """
+        This function check if exercise has been added correctly
+            Args: 
+                muscle (string): what muscle was chosen
+                exercise (string): name of the exercise
+                weight (int): multiplier. How much work a muscle must do. 0.1 - almost no effort, 1 - muscle is main mover.
+                
+            Returns:
+                if_exist (list of tuples): [ (muscle, exercise, weight) ]"""
         sqlite_check_query = """SELECT muscle, exercise, multiplier
                                 FROM exercises 
                                 WHERE muscle == ? AND exercise == ? AND multiplier == ?"""
