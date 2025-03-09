@@ -7,8 +7,19 @@ class ToplevelWindowAddExercise(ctk.CTkToplevel):
         super().__init__(*args, **kwargs)
         self.geometry("400x300")
 
-        self.label = ctk.CTkLabel(self, text="ToplevelWindow")
+        self.sql_handler = SQLHandler()
+        self.muscle_list = self.sql_handler.read_all_muscles()
+
+        self.label = ctk.CTkLabel(self, text='Name your new exercise')
         self.label.pack(padx=20, pady=20)
+        self.entry = ctk.CTkEntry(self, placeholder_text='Exercise name')
+        self.entry.pack(padx=20, pady=20)
+
+        self.label_musc = ctk.CTkLabel(self, text='What muscle ')
+        self.label_musc.pack(padx=20, pady=20)
+        self.musc = ctk.CTkComboBox(self, values=self.muscle_list)
+        self.musc.pack(padx=20, pady=20)
+
 
 class ChoiceFrame(ctk.CTkFrame):
     def __init__(self, parent):
