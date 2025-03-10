@@ -5,20 +5,64 @@ from CTkMessagebox import CTkMessagebox
 class ToplevelWindowAddExercise(ctk.CTkToplevel):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.geometry("400x300")
+        self.geometry("500x700")
+        self.grid_columnconfigure((0,1), weight=1)
 
         self.sql_handler = SQLHandler()
         self.muscle_list = self.sql_handler.read_all_muscles()
 
-        self.label = ctk.CTkLabel(self, text='Name your new exercise')
-        self.label.pack(padx=20, pady=20)
+        self.label = ctk.CTkLabel(self, text='Create a name of your exercise.', font=('', 18), wraplength=200)
+        self.label.grid(column=0, row=0, padx=20, pady=20, sticky='E')
         self.entry = ctk.CTkEntry(self, placeholder_text='Exercise name')
-        self.entry.pack(padx=20, pady=20)
+        self.entry.grid(column=1, row=0, padx=20, pady=20, sticky='W')
 
-        self.label_musc = ctk.CTkLabel(self, text='What muscle ')
-        self.label_musc.pack(padx=20, pady=20)
-        self.musc = ctk.CTkComboBox(self, values=self.muscle_list)
-        self.musc.pack(padx=20, pady=20)
+        self.label_musc = ctk.CTkLabel(self, text='What muscle are you going to train? If more that one, add another exercise with the same name but different muscle and multiplier.', font=('', 18), wraplength=200)
+        self.label_musc.grid(column=0, row=1, padx=20, pady=20, sticky='E')
+        self.musc = ctk.CTkComboBox(self,
+                                    values=self.muscle_list,
+                                    font=('', 18),
+                                    dropdown_font=('', 18))
+        self.musc.grid(column=1, row=1, padx=20, pady=20, sticky='W')
+
+        self.label_mult = ctk.CTkLabel(self, text='Set the multiplier from 0.1 (exercise has almost no impact for given muscle group) to 1 (indicate that chosen muscle is main mover during that exercise).', font=('', 18), wraplength=200)
+        self.label_mult.grid(column=0, row=2, padx=20, pady=20, sticky='E')
+        self.mult = ctk.CTkSlider(self, from_=0.1, to=1, number_of_steps=10)
+        self.mult.grid(column=1, row=2, padx=20, pady=20, sticky='W')
+
+        def btn_create():
+            name = self.entry.get()
+            muscle = self.musc.get()
+            multiplier = self.mult.get()
+            if (name != '') and (muscle != ''):
+                if self.sql_handler.check_if_exists(muscle, name) == []:
+                    self.sql_handler.new_exercise(muscle, name, multiplier)
+                    ex_added = self.sql_handler.check_add_correctly(muscle, name, multiplier)
+                    if (muscle, name, multiplier) in ex_added: 
+                        CTkMessagebox(title='Create exercise',
+                          message='Your exercise was successfully added.',
+                          icon='check',
+                          option_1='OK')
+                        
+                    else:
+                        CTkMessagebox(title='Ups...',
+                                message='Something went wrong.',
+                                icon='cancel')
+
+                else:
+                    CTkMessagebox(title='Create exercise',
+                              message='It seems your exercise is already on the list.',
+                              icon='warning')
+            else:
+                CTkMessagebox(title='Create exercise',
+                              message='All options must be filled and checked',
+                              icon='warning')
+
+        btn = ctk.CTkButton(self,
+                            text='Create',
+                            font=('', 15),
+                            command=btn_create)
+
+        btn.grid(column=0, columnspan=2, row=3, pady=40)
 
 
 class ChoiceFrame(ctk.CTkFrame):
@@ -50,32 +94,7 @@ class ChoiceFrame(ctk.CTkFrame):
                 self.toplevel_window = ToplevelWindowAddExercise(self)
             else:
                 self.toplevel_window_add_exercise.focus()
-            # dialog_name = ctk.CTkInputDialog(text='Create a name of your exercise. It should not start with digit, space or non-letter sign', title='Name your exercise')
-            # name = dialog_name.get_input()
-            # dialog_musc = ctk.CTkInputDialog(text=f'What muscle are you going to train with {name}. If more that one, add another exercise with the same name but different muscle and weight', title='Muscles trained')
-            # muscle = dialog_musc.get_input()
-            # dialog_weight = ctk.CTkInputDialog(text=f'Set weight of {name}. Choose number from 0 (indicate that this exercise has almost no impact for given muscle group) to 1 (indicate that chosen muscle is main mover during that exercise). If more that one, add another exercise with the same name but different muscle and weight', title='Muscle trained')
-            # weight = int(dialog_weight.get_input())
-            # if self.sql_handler.check_if_exists(muscle, name) == []:
-            #     try:
-            #         self.sql_handler.new_exercise(muscle, name, weight)
-            #         ex_added = self.sql_handler.check_add_correctly(muscle, name, weight)
-            #         print(type(ex_added))
-            #         print(ex_added)
-            #         if (muscle, name, weight) in ex_added:
-            #             CTkMessagebox(title='Great!',
-            #                         message='Your exercise was successfully added.',
-            #                         icon='check',
-            #                         option_1='Thanks')
-            #     except:
-            #         CTkMessagebox(title='Ups...',
-            #                     message='Something went wrong.',
-            #                     icon='cancel')
-            # else:
-            #     CTkMessagebox(title='Exercise status',
-            #                   message='It seems your exercise is already on the list.',
-            #                   icon='warning')
-
+            
         combo_ex = ctk.CTkComboBox(master=self,
                                     values=self.exercises_list,  
                                     command=ex_callback,  
