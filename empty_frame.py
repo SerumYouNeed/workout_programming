@@ -79,8 +79,6 @@ class DelExSetFrame(ctk.CTkFrame):
     def __init__(self, master, column):
         super().__init__(master)  
         self.grid_columnconfigure(2)  
-        self.ex_on_this_frame = master.master.exercise
-        self.sets_on_this_frame = master.master.sets
 
 class MyBtn(ctk.CTkButton):
     def __init__(self, master, column):
@@ -93,8 +91,6 @@ class MyBtn(ctk.CTkButton):
         def btn_add_ex_callback():
             multiplier_muscle_list =  self.sql_handler.read_multiplier_muscle(master.master.exercise)
             frame = DelExSetFrame(master, column)
-            frame.ex_on_this_frame = master.master.exercise
-            frame.sets_on_this_frame = master.master.sets
             # self: button, master: training_program_frame, master.master: empty_frame
             sets = 'sets'
             if master.master.sets == 1:
@@ -109,7 +105,6 @@ class MyBtn(ctk.CTkButton):
             ex_label = ctk.CTkLabel(master=frame, 
                                     text=lbl_txt, 
                                     font=('', 18))
-            print(f'total load per muscle:{master.master.total_load_per_muscle}')
 
             def btn_del_ex_callback():
                 # delete load from total load dict from empty_frame
@@ -125,8 +120,6 @@ class MyBtn(ctk.CTkButton):
                 ex_label.destroy()
                 delete_btn.destroy()
                 frame.destroy()
-                print(master.master.total_load_per_muscle)
-                print(master.master.daily_routines) 
                 
                 # update right side with total load
                 master.master.new_muscle_frame.update_table_total_load(master.master)
@@ -156,9 +149,6 @@ class MyBtn(ctk.CTkButton):
             # update left side
             for k in master.master.total_load_per_muscle.keys():
                 master.master.muscle_left_frame.update_muscle_left_frame(k)
-
-            print(master.master.total_load_per_muscle)
-            print(master.master.daily_routines)
 
         btn = ctk.CTkButton(master=master, 
                             text='Add exercise', 

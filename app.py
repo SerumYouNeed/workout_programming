@@ -14,7 +14,7 @@ class App(ctk.CTk):
         self._frame = None
         self.resizable(width=True, height=True)
         self.number_of_training_days = None
-        self.sql_handler = SQLHandler()
+        # self.sql_handler = SQLHandler()
         self._main_frame = MainFrame
         self.switch_frame(self._main_frame)
 
