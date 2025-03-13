@@ -109,7 +109,6 @@ class MyBtn(ctk.CTkButton):
             ex_label = ctk.CTkLabel(master=frame, 
                                     text=lbl_txt, 
                                     font=('', 18))
-            print(f'total load per muscle:{master.master.total_load_per_muscle}')
 
             def btn_del_ex_callback():
                 # delete load from total load dict from empty_frame
@@ -145,6 +144,7 @@ class MyBtn(ctk.CTkButton):
             for i in multiplier_muscle_list:
                 multiplier, muscle = i                
                 total_load = master.master.sets * multiplier
+                total_load = round(total_load, 2)
                 if muscle in master.master.total_load_per_muscle.keys():
                     master.master.total_load_per_muscle[muscle] += total_load
                 else:
@@ -156,9 +156,6 @@ class MyBtn(ctk.CTkButton):
             # update left side
             for k in master.master.total_load_per_muscle.keys():
                 master.master.muscle_left_frame.update_muscle_left_frame(k)
-
-            print(master.master.total_load_per_muscle)
-            print(master.master.daily_routines)
 
         btn = ctk.CTkButton(master=master, 
                             text='Add exercise', 
