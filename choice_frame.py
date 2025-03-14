@@ -86,7 +86,12 @@ class ChoiceFrame(ctk.CTkFrame):
                 parent.muscle_multiplier[lst[i][1]] = lst[i][0]
 
         def set_callback(set):
-            parent.sets = int(set)
+            if set == None:
+                CTkMessagebox(title='Message',
+                              message='All options must be filled before adding.',
+                              icon='warning')
+            else:
+                parent.sets = int(set)
 
         def new_exercise():
             if self.toplevel_window_add_exercise is None or not self.toplevel_window_add_exercise.winfo_exists():
