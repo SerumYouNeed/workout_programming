@@ -1,6 +1,7 @@
 import customtkinter as ctk
 
 class LegendFrame(ctk.CTkFrame):
+    '''Frame'''
     def __init__(self, parent):
         super().__init__(parent)  
         self.grid_columnconfigure((0), weight=1)
