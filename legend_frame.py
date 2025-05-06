@@ -1,7 +1,7 @@
 import customtkinter as ctk
 
 class LegendFrame(ctk.CTkFrame):
-    '''Frame'''
+    '''This class is for setting up legend on the screen'''
     def __init__(self, parent):
         super().__init__(parent)  
         self.grid_columnconfigure((0), weight=1)

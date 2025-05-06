@@ -5,10 +5,12 @@ from data.sqlite import SQLHandler
 class MainFrame(ctk.CTkFrame):
     def __init__(self, parent):
         super().__init__(parent) 
-        self.grid(row=0, column=0, sticky='ewns')
-        self.sql_handler = SQLHandler()
 
         ctk.set_appearance_mode('dark')
+        self.grid(row=0, column=0, sticky='ewns')
+
+        self.sql_handler = SQLHandler()
+
 
     def create_widgets(self, parent):
         grittings = ctk.CTkLabel(self, 

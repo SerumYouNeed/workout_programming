@@ -12,6 +12,7 @@ class EmptyFrame(ctk.CTkFrame):
         self.grid_columnconfigure(0, weight=2)
 
         self.sql_handler = SQLHandler()
+        
         self.muscle_multiplier = {}
         self.sets = None
         self.muscles = self.sql_handler.read_all_muscles()
