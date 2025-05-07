@@ -3,11 +3,12 @@ import customtkinter as ctk
 from main_frame import MainFrame
 from data.sqlite import SQLHandler
 
+
 class App(ctk.CTk):
     def __init__(self, title, geometry):
         super().__init__()
         self.title(title)
-        self.geometry(f'{geometry[0]}x{geometry[1]}')
+        self.geometry(f"{geometry[0]}x{geometry[1]}")
         self.minsize(geometry[0], geometry[1])
         self.rowconfigure(0, weight=1)
         self.columnconfigure(0, weight=1)
@@ -19,12 +20,12 @@ class App(ctk.CTk):
 
         self.mainloop()
 
-        ctk.set_appearance_mode('dark')
+        ctk.set_appearance_mode("dark")
 
     def switch_frame(self, frame_class):
         new_frame = frame_class(self)
         if self._frame is not None:
             self._frame.destroy()
         self._frame = new_frame
-        self._frame.grid(sticky='NSEW')
+        self._frame.grid(sticky="NSEW")
         self._frame.create_widgets(self)

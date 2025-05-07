@@ -1,13 +1,13 @@
 import customtkinter as ctk
 from data.sqlite import SQLHandler
 
+
 # List of muscles should be trained. Once added to the right muscle should disapeare.
 class MuscleLeftFrame(ctk.CTkFrame):
     def __init__(self, parent):
-        super().__init__(parent)  
-        self.grid_columnconfigure((0,1,2), weight=1)
-        self.configure(fg_color='transparent')
-
+        super().__init__(parent)
+        self.grid_columnconfigure((0, 1, 2), weight=1)
+        self.configure(fg_color="transparent")
 
         self.sql_handler = SQLHandler()
         self.muscles = self.sql_handler.read_all_muscles()
@@ -16,13 +16,13 @@ class MuscleLeftFrame(ctk.CTkFrame):
 
     def create_widgets(self):
         for i in self.muscles:
-            muscle = ctk.CTkLabel(master=self, font=('', 18), text=i)
-            muscle.grid(column=1, sticky='NSEW')
+            muscle = ctk.CTkLabel(master=self, font=("", 18), text=i)
+            muscle.grid(column=1, sticky="NSEW")
             self.muscle_labels.append(muscle)
 
     def update_muscle_left_frame(self, muscle):
         for i in self.muscle_labels:
-            if i.cget('text') == muscle:
+            if i.cget("text") == muscle:
                 i.destroy()
             if i in self.muscles:
                 self.removed_muscle_after_update.append(i)

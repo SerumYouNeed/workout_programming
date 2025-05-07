@@ -1,12 +1,13 @@
 import sqlite3
 
+
 class SQLHandler:
     def __init__(self):
         try:
-            self.connection = sqlite3.connect('data.db')
+            self.connection = sqlite3.connect("data.db")
             cursor = self.connection.cursor()
 
-            with open('data/schema.sql', 'r') as schema_file:
+            with open("data/schema.sql", "r") as schema_file:
                 sql_script = schema_file.read()
 
             cursor.executescript(sql_script)
@@ -15,9 +16,9 @@ class SQLHandler:
         except sqlite3.Error as error:
             pass
             # print(f'Error while reading sql script', error)
-            
+
     def read_all_exercises(self):
-        cursor = self.connection.cursor()     
+        cursor = self.connection.cursor()
         query = "SELECT DISTINCT exercise FROM exercises;"
         try:
             cursor.execute(query)
@@ -27,10 +28,10 @@ class SQLHandler:
                 exercises_list.append(i[0])
             # connection.close()
         except sqlite3.Error as error:
-            print(f'Error while reading exercises list', error)
+            print(f"Error while reading exercises list", error)
             cursor.close()
         return sorted(exercises_list)
-    
+
     def read_all_muscles(self):
         cursor = self.connection.cursor()
         cursor.execute("SELECT DISTINCT muscle FROM exercises;")
@@ -38,14 +39,16 @@ class SQLHandler:
         muscles = []
         for m in tup:
             muscles.append(m[0])
-        return sorted(muscles) 
-    
+        return sorted(muscles)
+
     def read_multiplier_muscle(self, exercise):
         cursor = self.connection.cursor()
-        cursor.execute("SELECT multiplier, muscle FROM exercises WHERE exercise == ?", (exercise,) )
+        cursor.execute(
+            "SELECT multiplier, muscle FROM exercises WHERE exercise == ?", (exercise,)
+        )
         tup = cursor.fetchall()
-        return tup 
-    
+        return tup
+
     def check_if_exists(self, muscle, exercise):
         sqlite_check_query = """SELECT muscle, exercise
                                 FROM exercises 
@@ -56,7 +59,7 @@ class SQLHandler:
         if_exist = cursor.fetchall()
         cursor.close()
         return if_exist
-    
+
     def new_exercise(self, muscle, exercise, weight):
         cursor = self.connection.cursor()
         sqlite_insert_query = """INSERT INTO exercises
@@ -71,11 +74,11 @@ class SQLHandler:
     def check_add_correctly(self, muscle, exercise, weight):
         """
         This function check if exercise has been added correctly
-            Args: 
+            Args:
                 muscle (string): what muscle was chosen
                 exercise (string): name of the exercise
                 weight (int): multiplier. How much work a muscle must do. 0.1 - almost no effort, 1 - muscle is main mover.
-                
+
             Returns:
                 if_exist (list of tuples): [ (muscle, exercise, weight) ]"""
         sqlite_check_query = """SELECT muscle, exercise, multiplier

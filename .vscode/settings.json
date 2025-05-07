@@ -1,0 +1,11 @@
+{
+    "files.autoSave": "afterDelay",
+    "editor.wordWrap": "on",
+    "editor.formatOnSave": true,
+    "python.formatting.provider": "black",
+    "[python]": {
+      "editor.defaultFormatter": "ms-python.black-formatter"
+    },
+    "python.defaultInterpreterPath": "/home/gregory/workspace/github.com/SerumYouNeed/workout_programming/venv/bin/python"
+  }
+  
