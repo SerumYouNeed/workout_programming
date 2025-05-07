@@ -6,6 +6,15 @@
     "[python]": {
       "editor.defaultFormatter": "ms-python.black-formatter"
     },
+    "python.linting.enabled": true,
+    "python.linting.flake8Enabled": true,
+    "python.linting.flake8Path": "/home/gregory/workspace/github.com/SerumYouNeed/workout_programming/venv/bin/flake8",
+    "python.linting.lintOnSave": true,
+    "python.sortImports.args": ["--profile", "black"],
+    "python.sortImports.path": "/home/gregory/workspace/github.com/SerumYouNeed/workout_programming/venv/bin/isort",
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true
+    },
     "python.defaultInterpreterPath": "/home/gregory/workspace/github.com/SerumYouNeed/workout_programming/venv/bin/python"
   }
   

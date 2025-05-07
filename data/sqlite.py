@@ -14,8 +14,7 @@ class SQLHandler:
             cursor.close()
 
         except sqlite3.Error as error:
-            pass
-            # print(f'Error while reading sql script', error)
+            print(f'Error while reading sql script', error)
 
     def read_all_exercises(self):
         cursor = self.connection.cursor()
@@ -28,7 +27,7 @@ class SQLHandler:
                 exercises_list.append(i[0])
             # connection.close()
         except sqlite3.Error as error:
-            print(f"Error while reading exercises list", error)
+            print(f"Error while reading exercises list: {error}")
             cursor.close()
         return sorted(exercises_list)
 
@@ -50,9 +49,11 @@ class SQLHandler:
         return tup
 
     def check_if_exists(self, muscle, exercise):
-        sqlite_check_query = """SELECT muscle, exercise
-                                FROM exercises 
-                                WHERE muscle == ? AND exercise == ?"""
+        sqlite_check_query = """
+            SELECT muscle, exercise
+            FROM exercises 
+            WHERE muscle == ? AND exercise == ?
+            """
         data_tuple = (muscle, exercise)
         cursor = self.connection.cursor()
         cursor.execute(sqlite_check_query, data_tuple)
@@ -62,10 +63,10 @@ class SQLHandler:
 
     def new_exercise(self, muscle, exercise, weight):
         cursor = self.connection.cursor()
-        sqlite_insert_query = """INSERT INTO exercises
-                          (id, muscle, exercise, multiplier) 
-                           VALUES 
-                          (NULL, ?, ?, ?)"""
+        sqlite_insert_query = """
+            INSERT INTO exercises (id, muscle, exercise, multiplier) 
+            VALUES (NULL, ?, ?, ?)
+            """
         data_tuple = (muscle, exercise, weight)
         cursor.execute(sqlite_insert_query, data_tuple)
         self.connection.commit()
@@ -81,9 +82,11 @@ class SQLHandler:
 
             Returns:
                 if_exist (list of tuples): [ (muscle, exercise, weight) ]"""
-        sqlite_check_query = """SELECT muscle, exercise, multiplier
-                                FROM exercises 
-                                WHERE muscle == ? AND exercise == ? AND multiplier == ?"""
+        sqlite_check_query = """
+            SELECT muscle, exercise, multiplier
+            FROM exercises 
+            WHERE muscle == ? AND exercise == ? AND multiplier == ?
+            """
         data_tuple = (muscle, exercise, weight)
         cursor = self.connection.cursor()
         cursor.execute(sqlite_check_query, data_tuple)

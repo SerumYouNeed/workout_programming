@@ -1,7 +1,8 @@
+import csv
+
 import customtkinter as ctk
 from CTkMessagebox import CTkMessagebox
 from reportlab.pdfgen import canvas
-import csv
 
 
 class SaveButton(ctk.CTkButton):

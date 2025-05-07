@@ -1,8 +1,9 @@
 import customtkinter as ctk
+
 from choice_frame import ChoiceFrame
 from data.sqlite import SQLHandler
-from muscle_frame import MuscleFrame
 from legend_frame import LegendFrame
+from muscle_frame import MuscleFrame
 from muscle_left_frame import MuscleLeftFrame
 from save_btn import SaveButton
 

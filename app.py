@@ -1,7 +1,7 @@
 # Root app class with basic switching frames function.
 import customtkinter as ctk
+
 from main_frame import MainFrame
-from data.sqlite import SQLHandler
 
 
 class App(ctk.CTk):

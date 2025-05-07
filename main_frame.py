@@ -1,6 +1,7 @@
 import customtkinter as ctk
-from empty_frame import EmptyFrame
+
 from data.sqlite import SQLHandler
+from empty_frame import EmptyFrame
 
 
 class MainFrame(ctk.CTkFrame):
@@ -33,33 +34,65 @@ class MainFrame(ctk.CTkFrame):
             match choice:
                 case "1":
                     instructions.configure(
-                        text="One day a week is usually not enough - but hey, it is still better than none. Try to train full body on each training sesion."
+                        text="""
+                        One day a week is usually not enough - but hey,
+                        it is still better than none.
+                        Try to train full body on each training sesion.
+                        """
                     )
                 case "2":
                     instructions.configure(
-                        text="For two training days it is highly recomended to perform two full body training. In this case each muscle will be trained two times per week. You can stimulate muscles from diffrent angles - say, perform flat bench press on day one and incline on day two."
+                        text="""
+                        For two training days it is highly recomended to
+                        perform two full body training. In this case each
+                        muscle will be trained two times per week.
+                        You can stimulate muscles from diffrent angles - say,
+                        flat bench press on day one and incline on day two.
+                        """
                     )
                 case "3":
                     instructions.configure(
-                        text="Three days split can be aranged as 3 x FBW, or you can create two routines A/B - like upper/lower, push/pull, torso/limbs, front/rear - and train A/B/A in first week, then B/A/B in second. Traing will be a tad longer then in four days per week but much more versatile then one and two days per week."
+                        text="""
+                        Three days split can be aranged as 3 x FBW,
+                        or you can create two routines A/B -
+                        upper/lower, push/pull, torso/limbs, front/rear -
+                        and train A/B/A in first week, then B/A/B in second.
+                        """
                     )
                 case "4":
                     instructions.configure(
-                        text="Four days split can be aranged as 4 x FBW, or you can create two routines A/B - like upper/lower, push/pull, torso/limbs, front/rear - and train A/B/A/B."
+                        text="""
+                        Four days split can be aranged as 4 x FBW,
+                        or you can create two routines A/B - like upper/lower,
+                        push/pull, torso/limbs, front/rear - and train A/B/A/B.
+                        """
                     )
                 case "5":
                     instructions.configure(
-                        text="Five days FBW split is hard to maintain, but if your recovery is ok you can try it. Training each muscle more than twice a week can be really challenging."
+                        text="""
+                        Five days FBW split is hard to maintain,
+                        but if your recovery is ok you can try it.
+                        Training each muscle more than twice a week
+                        can be really challenging.
+                        """
                     )
                 case "6":
                     instructions.configure(
-                        text="Only if everything in your life is about GAINS. Remember, even pros do not workout everyday. It is really, really hard to maintain that kind of routine."
+                        text="""
+                        Only if everything in your life is about GAINS.
+                        Remember, even pros do not workout everyday.
+                        It is really, really hard to maintain that kind of routine.
+                        """
                     )
                 case "7":
                     instructions.configure(
-                        text="Really...? Do you REALLY want to go to the gym every day? Give me a break."
+                        text="""
+                        Really...?
+                        Do you REALLY want to go to the gym
+                        every day?
+                        Give me a break."""
                     )
-            instructions.pack(pady=30, padx=30, ipady=15, ipadx=15, fill="both")
+            instructions.pack()
 
         frecquency_selector = ctk.CTkComboBox(
             self,

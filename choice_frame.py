@@ -1,6 +1,7 @@
 import customtkinter as ctk
-from data.sqlite import SQLHandler
 from CTkMessagebox import CTkMessagebox
+
+from data.sqlite import SQLHandler
 
 
 class ToplevelWindowAddExercise(ctk.CTkToplevel):
@@ -33,7 +34,13 @@ class ToplevelWindowAddExercise(ctk.CTkToplevel):
 
         self.label_mult = ctk.CTkLabel(
             self,
-            text="Set the multiplier from 0.1 (exercise has almost no impact for given muscle group) to 1 (indicate that chosen muscle is main mover during that exercise).",
+            text="""
+            Set the multiplier from 0.1
+            (exercise has almost no impact for
+            given muscle group) to 1
+            (indicate that chosen muscle is
+            main mover during that exercise).
+              """,
             font=("", 18),
             wraplength=200,
         )
@@ -105,7 +112,7 @@ class ChoiceFrame(ctk.CTkFrame):
                 parent.muscle_multiplier[lst[i][1]] = lst[i][0]
 
         def set_callback(set):
-            if set == None:
+            if set is None:
                 CTkMessagebox(
                     title="Message",
                     message="All options must be filled before adding.",
