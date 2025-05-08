@@ -12,10 +12,10 @@ class App(ctk.CTk):
         self.minsize(geometry[0], geometry[1])
         self.rowconfigure(0, weight=1)
         self.columnconfigure(0, weight=1)
-        self._frame = None
+        self._frame = MainFrame
         self.resizable(width=True, height=True)
         self.number_of_training_days = None
-        self._main_frame = MainFrame
+        # self._main_frame = MainFrame
         self.switch_frame(self._main_frame)
 
         self.mainloop()

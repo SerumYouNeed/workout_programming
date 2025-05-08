@@ -13,7 +13,7 @@
     "python.sortImports.args": ["--profile", "black"],
     "python.sortImports.path": "/home/gregory/workspace/github.com/SerumYouNeed/workout_programming/venv/bin/isort",
     "editor.codeActionsOnSave": {
-      "source.organizeImports": true
+      "source.organizeImports": "explicit"
     },
     "python.defaultInterpreterPath": "/home/gregory/workspace/github.com/SerumYouNeed/workout_programming/venv/bin/python"
   }
