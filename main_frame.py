@@ -13,6 +13,7 @@ class MainFrame(ctk.CTkFrame):
 
         self.sql_handler = SQLHandler()
 
+
     def create_widgets(self, parent):
         grittings = ctk.CTkLabel(
             self, text="Welcome in the workout creator!", font=("", 29, "bold")
@@ -34,11 +35,9 @@ class MainFrame(ctk.CTkFrame):
             match choice:
                 case "1":
                     instructions.configure(
-                        text="""
-                        One day a week is usually not enough - but hey,
+                        text="""One day a week is usually not enough - but hey,
                         it is still better than none.
-                        Try to train full body on each training sesion.
-                        """
+                        Try to train full body on each training sesion."""
                     )
                 case "2":
                     instructions.configure(
