@@ -1,4 +1,3 @@
-# Root app class with basic switching frames function.
 import customtkinter as ctk
 
 from main_frame import MainFrame
@@ -15,7 +14,7 @@ class App(ctk.CTk):
         self._frame = None
         self.resizable(width=True, height=True)
         self.number_of_training_days = None
-        
+
         self.switch_frame(MainFrame)
 
         self.mainloop()

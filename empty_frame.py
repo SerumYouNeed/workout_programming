@@ -88,7 +88,8 @@ class EmptyFrame(ctk.CTkFrame):
         SaveButton(self)
 
 
-# frame grouping delete button and exercise - sets label in one place. It remember exercise and sets on it.
+# frame grouping delete button and exercise - sets label in one place.
+# It remember exercise and sets on it.
 class DelExSetFrame(ctk.CTkFrame):
     def __init__(self, master, column):
         super().__init__(master)

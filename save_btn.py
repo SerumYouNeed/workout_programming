@@ -65,7 +65,10 @@ class SaveButton(ctk.CTkButton):
 
         def type_file_name():
             dialog = ctk.CTkInputDialog(
-                text="Enter a <name>. Program will create two files for you: \n<name>.pdf\n<name>.csv\nYou can find them in the location of the program.",
+                text="""
+Enter a <name>. Program will create two files for you:
+\n<name>.pdf\n<name>.csv\n
+You can find them in the location of the program.""",
                 title="Name your file",
             )
             return dialog.get_input()

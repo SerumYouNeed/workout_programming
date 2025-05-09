@@ -22,7 +22,10 @@ class ToplevelWindowAddExercise(ctk.CTkToplevel):
 
         self.label_musc = ctk.CTkLabel(
             self,
-            text="What muscle are you going to train? If more that one, add another exercise with the same name but different muscle and multiplier.",
+            text="""
+What muscle are you going to train?
+If more that one, add another exercise with the same name
+ but different muscle and multiplier.""",
             font=("", 18),
             wraplength=200,
         )

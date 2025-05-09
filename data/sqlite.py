@@ -3,18 +3,14 @@ import sqlite3
 
 class SQLHandler:
     def __init__(self):
-        try:
-            self.connection = sqlite3.connect("data.db")
-            cursor = self.connection.cursor()
+        self.connection = sqlite3.connect("data.db")
+        cursor = self.connection.cursor()
 
-            with open("data/schema.sql", "r") as schema_file:
-                sql_script = schema_file.read()
+        with open("data/schema.sql", "r") as schema_file:
+            sql_script = schema_file.read()
 
-            cursor.executescript(sql_script)
-            cursor.close()
-
-        except sqlite3.Error as error:
-            print(f'Error while reading sql script', error)
+        cursor.executescript(sql_script)
+        cursor.close()
 
     def read_all_exercises(self):
         cursor = self.connection.cursor()
@@ -51,7 +47,7 @@ class SQLHandler:
     def check_if_exists(self, muscle, exercise):
         sqlite_check_query = """
             SELECT muscle, exercise
-            FROM exercises 
+            FROM exercises
             WHERE muscle == ? AND exercise == ?
             """
         data_tuple = (muscle, exercise)
@@ -64,7 +60,7 @@ class SQLHandler:
     def new_exercise(self, muscle, exercise, weight):
         cursor = self.connection.cursor()
         sqlite_insert_query = """
-            INSERT INTO exercises (id, muscle, exercise, multiplier) 
+            INSERT INTO exercises (id, muscle, exercise, multiplier)
             VALUES (NULL, ?, ?, ?)
             """
         data_tuple = (muscle, exercise, weight)
@@ -78,13 +74,13 @@ class SQLHandler:
             Args:
                 muscle (string): what muscle was chosen
                 exercise (string): name of the exercise
-                weight (int): multiplier. How much work a muscle must do. 0.1 - almost no effort, 1 - muscle is main mover.
-
+                weight (int): multiplier. How much work a muscle must do.
+                0.1 - almost no effort, 1 - muscle is main mover.
             Returns:
                 if_exist (list of tuples): [ (muscle, exercise, weight) ]"""
         sqlite_check_query = """
             SELECT muscle, exercise, multiplier
-            FROM exercises 
+            FROM exercises
             WHERE muscle == ? AND exercise == ? AND multiplier == ?
             """
         data_tuple = (muscle, exercise, weight)
