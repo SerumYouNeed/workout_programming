@@ -25,7 +25,7 @@ class ToplevelWindowAddExercise(ctk.CTkToplevel):
             text="""
 What muscle are you going to train?
 If more that one, add another exercise with the same name
- but different muscle and multiplier.""",
+but different muscle and multiplier.""",
             font=("", 18),
             wraplength=200,
         )
@@ -38,12 +38,11 @@ If more that one, add another exercise with the same name
         self.label_mult = ctk.CTkLabel(
             self,
             text="""
-            Set the multiplier from 0.1
-            (exercise has almost no impact for
-            given muscle group) to 1
-            (indicate that chosen muscle is
-            main mover during that exercise).
-              """,
+Set the multiplier from 0.1
+(exercise has almost no impact for
+given muscle group) to 1
+(indicate that chosen muscle is
+main mover during that exercise).""",
             font=("", 18),
             wraplength=200,
         )
